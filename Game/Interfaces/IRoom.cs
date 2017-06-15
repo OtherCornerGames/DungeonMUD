@@ -9,6 +9,5 @@ namespace CastleGrimtol.Game
         List<Item> Items { get; set; }
 
         void UseItem(Item item);
-
     }
 }
