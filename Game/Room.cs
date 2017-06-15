@@ -13,6 +13,7 @@ namespace CastleGrimtol.Game
     {
       Name = name;
       Description = description;
+
     }
     public void AddRoom(string direction, Room room)
     {

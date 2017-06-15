@@ -19,7 +19,7 @@ namespace CastleGrimtol.Game
       Console.ForegroundColor = ConsoleColor.Red;
       string CharacterName = Console.ReadLine();
       Console.ForegroundColor = ConsoleColor.Blue;
-      Console.WriteLine("\nGreat! Your character is now named " + CharacterName + "\n");
+      Console.WriteLine("Great! Your character is now named " + CharacterName + "\n");
       Console.ForegroundColor = ConsoleColor.White;
       return CharacterName;
     }

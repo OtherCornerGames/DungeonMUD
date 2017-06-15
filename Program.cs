@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CastleGrimtol.Game;
 
 namespace CastleGrimtol
@@ -23,6 +24,11 @@ namespace CastleGrimtol
                 {
                     game.CurrentRoom = nextRoom;
                     System.Console.WriteLine(game.CurrentRoom.Description);
+                    System.Console.WriteLine(game.CurrentRoom.Items);
+                    
+                    
+                        // System.Console.WriteLine($"{item.Name}: {item.Description}");
+                    
                 }
                 else if(userAction == "q" || userAction == "quit")
                 {

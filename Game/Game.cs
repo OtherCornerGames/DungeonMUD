@@ -15,6 +15,7 @@ namespace CastleGrimtol.Game
       Console.WriteLine("Welcome to the warrens of Emirkol the Chaotic!\n");
       Console.ForegroundColor = ConsoleColor.White;
       CurrentPlayer = new Player();
+      Help();
     }
     public string GetUserInput()
     {
@@ -31,10 +32,16 @@ namespace CastleGrimtol.Game
     {
 
     }
+    public void Help()
+    {
+      System.Console.WriteLine("Valid actions are North, East, South, West, Quit, Help.\n");
+    }
     public void BuildRooms()
     {
-      Room room1 = new Room("Room 1", "a room");
-      Room room2 = new Room("room 2", " a room as well.");
+      Item taco = new Item("Taco", "MEAAAAT");
+      Room room1 = new Room("Room 1", "a room\n");
+      Room room2 = new Room("room 2", " a room as well.\n");
+      room1.Items.Add(taco);
 
       room1.AddRoom("east", room2);
       room2.AddRoom("west", room1);
