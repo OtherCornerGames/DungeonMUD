@@ -11,7 +11,7 @@ namespace CastleGrimtol.Game
 
     public void UseItem(Item item)
     {
-      throw new NotImplementedException();
+      
     }
   }
 }
