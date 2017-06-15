@@ -14,6 +14,7 @@ namespace CastleGrimtol.Game
     }
     public string NameCharacter()
     {
+      Console.ForegroundColor = ConsoleColor.Yellow;
       Console.WriteLine("What would you like your character's name to be?\n");
       Console.ForegroundColor = ConsoleColor.Red;
       string CharacterName = Console.ReadLine();

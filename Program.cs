@@ -8,8 +8,15 @@ namespace CastleGrimtol
         public static void Main(string[] args)
         {
             Game.Game game = new Game.Game();
-            game.StartGame();
-            Player player = new Player();
+            Boolean playing = true;
+
+            game.Setup();
+
+
+            while(playing)
+            {
+                string userAction = game.GetUserInput();
+            }
         }
     }
 }
