@@ -13,6 +13,9 @@ namespace CastleGrimtol
 
             game.Setup();
             game.BuildRooms();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            System.Console.WriteLine($"{game.CurrentRoom.Name}:\n{game.CurrentRoom.Description}");
+            Console.ForegroundColor = ConsoleColor.White;
 
             while(playing)
             {
@@ -20,17 +23,34 @@ namespace CastleGrimtol
                 Room nextRoom;
                 game.CurrentRoom.Exits.TryGetValue(userAction, out nextRoom);
 
+                if(userAction == "l" || userAction == "look")
+                {
+                    game.Look(game.CurrentRoom);
+                }
+                if(userAction == "h" || userAction == "help")
+                {
+                    game.Help();
+                }
+                if(userAction == "t" || userAction == "take")
+                {
+                    System.Console.WriteLine("Take");
+                }
+                if(userAction == "i" || userAction == "inventory")
+                {
+                    System.Console.WriteLine("Inventory");
+                }
+                if(userAction == "q" || userAction == "quit")
+                {
+                    playing = game.Quit();
+                }
                 if(nextRoom != null)
                 {
                     game.CurrentRoom = nextRoom;
-                    System.Console.WriteLine(game.CurrentRoom.Description);
+                    game.Look(game.CurrentRoom);                    
                 }
-                else if(userAction == "q" || userAction == "quit")
+                else
                 {
-                    playing = false;
-                }
-                else{
-                    System.Console.WriteLine("Cant go that way");
+                    System.Console.WriteLine("After attempting...you realize this is not the action you wanted to take. You should try again.\n");
                 }
             }
         }

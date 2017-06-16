@@ -27,18 +27,38 @@ namespace CastleGrimtol.Game
     {
 
     }
-
     public void UseItem(string itemName)
     {
 
     }
+    public Boolean Quit()
+    {
+        Boolean playing;
+      System.Console.WriteLine("Leave the game? All progress will be lost. Y/N");
+      string input = Console.ReadLine().ToLower();
+      if (input == "y" || input == "yes")
+      {
+        return playing = false;
+      }
+      else
+      {
+        System.Console.WriteLine("OK");
+        return playing = true;
+      }
+    }
+    public void Look(Room room)
+    {
+      Console.ForegroundColor = ConsoleColor.Cyan;
+      System.Console.WriteLine($"{room.Name}:\n{room.Description}");
+      Console.ForegroundColor = ConsoleColor.White;
+    }
     public void Help()
     {
-      System.Console.WriteLine("Valid actions are direction number of the exit.\nEX: East 1, East 2.\nLOOK: which allows you to search the room for treasure, but you may disturb something...\nHELP: which displays this help list.\nTAKE: which takes an item and adds it to your inventory. EX: Take Gold.\nQuit: leaves the game.\n");
+      System.Console.WriteLine("Valid actions are direction number of the exit.\nEX: East 1 or e1.\nLOOK or l: which allows you to search the room for treasure, but you may disturb something...\nHELP or h: which displays this help list.\nTAKE or t: which takes an item and adds it to your inventory. EX: Take Gold.\nINVENTORY or i: Views the items in your inventory.\nQUIT or q: leaves the game.\n");
     }
     public void BuildRooms()
     {
-      
+
       Room room1 = new Room("Room 1", "Spirals of green stones cover the floor, A circle of tall stones stands in the east side of the room. Exits: East 1, East 2, South 1, South 2.\n");
       Room room2 = new Room("Room 2", "An altar of evil sits in the center of the room. You notice a pile of iron spikes lies in the north side of the room. Exits: West 1, East 1, East 2.\n");
       Room room3 = new Room("Room 3", "Someone has scrawled \"Run Away!\" in goblin runes on the north wall, Several pieces of trash are also strewn about the room. Exits: West 1, East 1, East 2, East 3, South 1.\n");
@@ -49,7 +69,7 @@ namespace CastleGrimtol.Game
       Room room8 = new Room("Room 8", "Some small piles of stone rubble ornament the floor. Exits: North 1, West 1, East 1, East 2, South 1, South 2.\n");
       Room room9 = new Room("Room 9", "The floor is smooth, but the walls of this room appear to be less worked and rough. Exits: East 1, East 2.\n");
       Room room10 = new Room("Room 10", "Several iron cages are scattered throughout the room. A pile of torn paper lies in the north-west corner of the room. Exits: West 1, East 1.\n");
-      Room room11= new Room("Room 11", "Dark moss partially covers the walls, even the air feels rather damp. Exits: North 1, North 2, West 1, West 2.\n");
+      Room room11 = new Room("Room 11", "Dark moss partially covers the walls, even the air feels rather damp. Exits: North 1, North 2, West 1, West 2.\n");
       Room room12 = new Room("Room 12", "Dimly lit, and longer than most of the rooms, this one almost appears to be a slightly larger hallway. Exits: West 1, West 2, South 1.\n");
       Room room13 = new Room("Room 13", "Corpses, too badly decayed to discern what they once were, lay randomly about the room. Exits: North 1, East 1, South 1, West 1.\n");
       Room room14 = new Room("Room 14", "A tile labyrinth covers the floor, intricately and deliberatly installed. A shatter sword lies in ruin in the north-west corner. Exits: North 1.\n");
