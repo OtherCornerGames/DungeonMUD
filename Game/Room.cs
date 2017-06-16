@@ -15,7 +15,7 @@ namespace CastleGrimtol.Game
       Description = description;
 
     }
-    public void AddRoom(string direction, Room room)
+    public void AddDoor(string direction, Room room)
     {
       Exits.Add(direction, room);
     }

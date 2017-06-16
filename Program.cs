@@ -22,9 +22,11 @@ namespace CastleGrimtol
 
                 if(nextRoom != null)
                 {
+                    Item taco = new Item("Taco", "MEAAAAT");
                     game.CurrentRoom = nextRoom;
                     System.Console.WriteLine(game.CurrentRoom.Description);
                     System.Console.WriteLine(game.CurrentRoom.Items);
+                    game.CurrentRoom.Items.Add(taco);
                     
                     
                         // System.Console.WriteLine($"{item.Name}: {item.Description}");
