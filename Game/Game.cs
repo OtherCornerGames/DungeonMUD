@@ -34,7 +34,7 @@ namespace CastleGrimtol.Game
     }
     public void Help()
     {
-      System.Console.WriteLine("Valid actions are direction number of the exit. EX: east 1, east 2.\nLook, which allows you to search the room for treasure, but you may disturb something...\nHelp, which displays this help list.\nTake, which takes an item. EX Take Gold.\n Quit, leaves the game.\n");
+      System.Console.WriteLine("Valid actions are direction number of the exit.\nEX: East 1, East 2.\nLOOK: which allows you to search the room for treasure, but you may disturb something...\nHELP: which displays this help list.\nTAKE: which takes an item and adds it to your inventory. EX: Take Gold.\nQuit: leaves the game.\n");
     }
     public void BuildRooms()
     {
