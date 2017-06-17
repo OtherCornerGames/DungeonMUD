@@ -19,7 +19,7 @@ namespace CastleGrimtol.Game
     }
     public string GetUserInput()
     {
-      System.Console.WriteLine("What would you like to do?");
+      System.Console.WriteLine("What would you like to do?\n");
       string input = Console.ReadLine();
       return input;
     }
