@@ -27,23 +27,23 @@ namespace CastleGrimtol
                 {
                     game.Look(game.CurrentRoom);
                 }
-                if(userAction == "h" || userAction == "help")
+                else if(userAction == "h" || userAction == "help")
                 {
                     game.Help();
                 }
-                if(userAction == "t" || userAction == "take")
+                else if(userAction == "t" || userAction == "take")
                 {
                     System.Console.WriteLine("Take");
                 }
-                if(userAction == "i" || userAction == "inventory")
+                else if(userAction == "i" || userAction == "inventory")
                 {
                     System.Console.WriteLine("Inventory");
                 }
-                if(userAction == "q" || userAction == "quit")
+                else if(userAction == "q" || userAction == "quit")
                 {
                     playing = game.Quit();
                 }
-                if(nextRoom != null)
+                else if(nextRoom != null)
                 {
                     game.CurrentRoom = nextRoom;
                     game.Look(game.CurrentRoom);                    
