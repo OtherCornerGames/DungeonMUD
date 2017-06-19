@@ -20,12 +20,12 @@ namespace CastleGrimtol
       while (playing)
       {
         string userAction = game.GetUserInput().ToLower();
-        Console.WriteLine("\n");
         Room nextRoom;
         game.CurrentRoom.Exits.TryGetValue(userAction, out nextRoom);
 
         if (userAction == "l" || userAction == "look")
         {
+          System.Console.WriteLine("\n");
           game.Look(game.CurrentRoom);
         }
         else if (userAction == "h" || userAction == "help")
@@ -42,11 +42,12 @@ namespace CastleGrimtol
         }
         else if (userAction == "q" || userAction == "quit")
         {
-          playing = game.Quit();
+          playing = game.Quit(playing);
         }
         else if (nextRoom != null)
         {
           game.CurrentRoom = nextRoom;
+          System.Console.WriteLine("\n");
           game.Look(game.CurrentRoom);
         }
         else

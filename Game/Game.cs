@@ -31,9 +31,8 @@ namespace CastleGrimtol.Game
     {
 
     }
-    public Boolean Quit()
+    public Boolean Quit(Boolean playing)
     {
-        Boolean playing;
       System.Console.WriteLine("Leave the game? All progress will be lost. Y/N");
       string input = Console.ReadLine().ToLower();
       if (input == "y" || input == "yes")
@@ -50,6 +49,10 @@ namespace CastleGrimtol.Game
     {
       Console.ForegroundColor = ConsoleColor.Cyan;
       System.Console.WriteLine($"{room.Name}:\n{room.Description}");
+      for (int i = 0; i < length; i++)
+      {
+          
+      }
       Console.ForegroundColor = ConsoleColor.White;
     }
     public void Help()
@@ -58,7 +61,6 @@ namespace CastleGrimtol.Game
     }
     public void BuildRooms()
     {
-
       Room room1 = new Room("Room 1", "Spirals of green stones cover the floor, A circle of tall stones stands in the east side of the room. Exits: East 1, East 2, South 1, South 2.\n");
       Room room2 = new Room("Room 2", "An altar of evil sits in the center of the room. You notice a pile of iron spikes lies in the north side of the room. Exits: West 1, East 1, East 2.\n");
       Room room3 = new Room("Room 3", "Someone has scrawled \"Run Away!\" in goblin runes on the north wall, Several pieces of trash are also strewn about the room. Exits: West 1, East 1, East 2, East 3, South 1.\n");
@@ -100,141 +102,154 @@ namespace CastleGrimtol.Game
       Room room39 = new Room("Room 39", "Lit candles are scattered across the floor, Someone has scrawled an arcane symbol on the east wall. Exits: North 1.\n");
       Room room40 = new Room("Room 40", "The south and west walls have been engraved with incoherent labyrinths, A shallow pool of oil lies in the east side of the room. Exits: North 1, West 1.\n");
 
-      room1.AddDoor("east 1", room2);
-      room1.AddDoor("east 2", room7);
-      room1.AddDoor("south 1", room16);
-      room1.AddDoor("south 2", room9);
-      room2.AddDoor("west 1", room1);
-      room2.AddDoor("east 1", room3);
-      room2.AddDoor("east 2", room24);
-      room3.AddDoor("west 1", room2);
-      room3.AddDoor("east 1", room4);
-      room3.AddDoor("east 2", room6);
-      room3.AddDoor("east 3", room8);
-      room3.AddDoor("south 1", room14);
-      room4.AddDoor("west 1", room3);
-      room4.AddDoor("west 2", room6);
-      room4.AddDoor("south 1", room8);
-      room4.AddDoor("east 1", room8);
-      room5.AddDoor("east 1", room11);
-      room5.AddDoor("south 1", room11);
-      room6.AddDoor("west 1", room3);
-      room6.AddDoor("east 1", room4);
-      room7.AddDoor("west 1", room1);
-      room7.AddDoor("south 1", room17);
-      room8.AddDoor("north 1", room4);
-      room8.AddDoor("west 1", room3);
-      room8.AddDoor("east 1", room4);
-      room8.AddDoor("east 2", room10);
-      room8.AddDoor("south 1", room13);
-      room8.AddDoor("south 2", room13);
-      room9.AddDoor("east 1", room1);
-      room9.AddDoor("east 2", room12);
-      room10.AddDoor("west 1", room8);
-      room10.AddDoor("east 1", room11);
-      room11.AddDoor("north 1", room5);
-      room11.AddDoor("north 2", room5);
-      room11.AddDoor("west 1", room10);
-      room11.AddDoor("west 2", room15);
-      room11.AddDoor("south 1", room22);
-      room12.AddDoor("west 1", room9);
-      room12.AddDoor("west 2", room16);
-      room12.AddDoor("south 1", room19);
-      room13.AddDoor("north 1", room8);
-      room13.AddDoor("east 1", room8);
-      room13.AddDoor("south 1", room20);
-      room13.AddDoor("west 1", room21);
-      room14.AddDoor("north 1", room3);
-      room15.AddDoor("east 1", room11);
-      room15.AddDoor("east 2", room18);
-      room15.AddDoor("south 1", room22);
-      room16.AddDoor("north 1", room1);
-      room16.AddDoor("north 2", room12);
-      room17.AddDoor("north 1", room7);
-      room17.AddDoor("west 1", room19);
-      room17.AddDoor("south 1", room23);
-      room18.AddDoor("east 1", room15);
-      room18.AddDoor("south 1", room22);
-      room19.AddDoor("north 1", room12);
-      room19.AddDoor("east 1", room17);
-      room19.AddDoor("west 1", room25);
-      room20.AddDoor("north 1", room13);
-      room20.AddDoor("south 1", room26);
-      room20.AddDoor("south 2", room26);
-      room20.AddDoor("west 1", room21);
-      room21.AddDoor("north 1", room13);
-      room21.AddDoor("north 2", room20);
-      room22.AddDoor("north 1", room15);
-      room22.AddDoor("north 2", room18);
-      room22.AddDoor("east 1", room11);
-      room22.AddDoor("east 2", room37);
-      room22.AddDoor("east 3", room37);
-      room23.AddDoor("north 1", room17);
-      room23.AddDoor("east 1", room24);
-      room23.AddDoor("west 1", room25);
-      room23.AddDoor("south 1", room27);
-      room24.AddDoor("north 1", room2);
-      room24.AddDoor("east 1", room26);
-      room24.AddDoor("west 1", room23);
-      room25.AddDoor("north 1", room19);
-      room25.AddDoor("east 1", room23);
-      room25.AddDoor("east 2", room27);
-      room25.AddDoor("south 1", room31);
-      room25.AddDoor("south 2", room32);
-      room26.AddDoor("north 1", room20);
-      room26.AddDoor("east 1", room20);
-      room26.AddDoor("east 2", room28);
-      room26.AddDoor("west 1", room24);
-      room26.AddDoor("west 2", room27);
-      room27.AddDoor("north 1", room23);
-      room27.AddDoor("east 1", room26);
-      room27.AddDoor("east 2", room29);
-      room27.AddDoor("south 1", room31);
-      room27.AddDoor("south 2", room35);
-      room27.AddDoor("west 1", room25);
-      room28.AddDoor("south 1", room33);
-      room28.AddDoor("south 2", room34);
-      room28.AddDoor("west 1", room26);
-      room28.AddDoor("west 2", room30);
-      room29.AddDoor("east 1", room30);
-      room29.AddDoor("south 1", room39);
-      room29.AddDoor("west 1", room27);
-      room29.AddDoor("west 2", room35);
-      room30.AddDoor("east 1", room28);
-      room30.AddDoor("east 2", room33);
-      room30.AddDoor("east 3", room36);
-      room30.AddDoor("south 1", room40);
-      room30.AddDoor("south 2", room36);
-      room30.AddDoor("west 1", room29);
-      room31.AddDoor("east 1", room32);
-      room31.AddDoor("east 2", room27);
-      room31.AddDoor("south 1", room38);
-      room31.AddDoor("west 1", room25);
-      room32.AddDoor("west 1", room31);
-      room32.AddDoor("north 1", room25);
-      room33.AddDoor("north 1", room28);
-      room33.AddDoor("east 1", room34);
-      room33.AddDoor("south 1", room36);
-      room33.AddDoor("west 1", room30);
-      room34.AddDoor("north 1", room28);
-      room34.AddDoor("west 1", room33);
-      room34.AddDoor("south 1", room37);
-      room35.AddDoor("north 1", room29);
-      room35.AddDoor("south 1", room40);
-      room35.AddDoor("west 1", room38);
-      room36.AddDoor("north 1", room33);
-      room36.AddDoor("east 1", room37);
-      room36.AddDoor("west 1", room30);
-      room36.AddDoor("west 2", room30);
-      room37.AddDoor("north 1", room34);
-      room37.AddDoor("west 1", room36);
-      room37.AddDoor("west 2", room22);
-      room38.AddDoor("north 1", room31);
-      room38.AddDoor("east 1", room35);
-      room38.AddDoor("south 1", room35);
-      room39.AddDoor("north 1", room29);
-      room40.AddDoor("north 1", room30);
-      room40.AddDoor("west 1", room35);
+      BuildExits();
+      BuildItems();
+
+      void BuildExits()
+      {
+        room1.AddDoor("east 1", room2);
+        room1.AddDoor("east 2", room7);
+        room1.AddDoor("south 1", room16);
+        room1.AddDoor("south 2", room9);
+        room2.AddDoor("west 1", room1);
+        room2.AddDoor("east 1", room3);
+        room2.AddDoor("east 2", room24);
+        room3.AddDoor("west 1", room2);
+        room3.AddDoor("east 1", room4);
+        room3.AddDoor("east 2", room6);
+        room3.AddDoor("east 3", room8);
+        room3.AddDoor("south 1", room14);
+        room4.AddDoor("west 1", room3);
+        room4.AddDoor("west 2", room6);
+        room4.AddDoor("south 1", room8);
+        room4.AddDoor("east 1", room8);
+        room5.AddDoor("east 1", room11);
+        room5.AddDoor("south 1", room11);
+        room6.AddDoor("west 1", room3);
+        room6.AddDoor("east 1", room4);
+        room7.AddDoor("west 1", room1);
+        room7.AddDoor("south 1", room17);
+        room8.AddDoor("north 1", room4);
+        room8.AddDoor("west 1", room3);
+        room8.AddDoor("east 1", room4);
+        room8.AddDoor("east 2", room10);
+        room8.AddDoor("south 1", room13);
+        room8.AddDoor("south 2", room13);
+        room9.AddDoor("east 1", room1);
+        room9.AddDoor("east 2", room12);
+        room10.AddDoor("west 1", room8);
+        room10.AddDoor("east 1", room11);
+        room11.AddDoor("north 1", room5);
+        room11.AddDoor("north 2", room5);
+        room11.AddDoor("west 1", room10);
+        room11.AddDoor("west 2", room15);
+        room11.AddDoor("south 1", room22);
+        room12.AddDoor("west 1", room9);
+        room12.AddDoor("west 2", room16);
+        room12.AddDoor("south 1", room19);
+        room13.AddDoor("north 1", room8);
+        room13.AddDoor("east 1", room8);
+        room13.AddDoor("south 1", room20);
+        room13.AddDoor("west 1", room21);
+        room14.AddDoor("north 1", room3);
+        room15.AddDoor("east 1", room11);
+        room15.AddDoor("east 2", room18);
+        room15.AddDoor("south 1", room22);
+        room16.AddDoor("north 1", room1);
+        room16.AddDoor("north 2", room12);
+        room17.AddDoor("north 1", room7);
+        room17.AddDoor("west 1", room19);
+        room17.AddDoor("south 1", room23);
+        room18.AddDoor("east 1", room15);
+        room18.AddDoor("south 1", room22);
+        room19.AddDoor("north 1", room12);
+        room19.AddDoor("east 1", room17);
+        room19.AddDoor("west 1", room25);
+        room20.AddDoor("north 1", room13);
+        room20.AddDoor("south 1", room26);
+        room20.AddDoor("south 2", room26);
+        room20.AddDoor("west 1", room21);
+        room21.AddDoor("north 1", room13);
+        room21.AddDoor("north 2", room20);
+        room22.AddDoor("north 1", room15);
+        room22.AddDoor("north 2", room18);
+        room22.AddDoor("east 1", room11);
+        room22.AddDoor("east 2", room37);
+        room22.AddDoor("east 3", room37);
+        room23.AddDoor("north 1", room17);
+        room23.AddDoor("east 1", room24);
+        room23.AddDoor("west 1", room25);
+        room23.AddDoor("south 1", room27);
+        room24.AddDoor("north 1", room2);
+        room24.AddDoor("east 1", room26);
+        room24.AddDoor("west 1", room23);
+        room25.AddDoor("north 1", room19);
+        room25.AddDoor("east 1", room23);
+        room25.AddDoor("east 2", room27);
+        room25.AddDoor("south 1", room31);
+        room25.AddDoor("south 2", room32);
+        room26.AddDoor("north 1", room20);
+        room26.AddDoor("east 1", room20);
+        room26.AddDoor("east 2", room28);
+        room26.AddDoor("west 1", room24);
+        room26.AddDoor("west 2", room27);
+        room27.AddDoor("north 1", room23);
+        room27.AddDoor("east 1", room26);
+        room27.AddDoor("east 2", room29);
+        room27.AddDoor("south 1", room31);
+        room27.AddDoor("south 2", room35);
+        room27.AddDoor("west 1", room25);
+        room28.AddDoor("south 1", room33);
+        room28.AddDoor("south 2", room34);
+        room28.AddDoor("west 1", room26);
+        room28.AddDoor("west 2", room30);
+        room29.AddDoor("east 1", room30);
+        room29.AddDoor("south 1", room39);
+        room29.AddDoor("west 1", room27);
+        room29.AddDoor("west 2", room35);
+        room30.AddDoor("east 1", room28);
+        room30.AddDoor("east 2", room33);
+        room30.AddDoor("east 3", room36);
+        room30.AddDoor("south 1", room40);
+        room30.AddDoor("south 2", room36);
+        room30.AddDoor("west 1", room29);
+        room31.AddDoor("east 1", room32);
+        room31.AddDoor("east 2", room27);
+        room31.AddDoor("south 1", room38);
+        room31.AddDoor("west 1", room25);
+        room32.AddDoor("west 1", room31);
+        room32.AddDoor("north 1", room25);
+        room33.AddDoor("north 1", room28);
+        room33.AddDoor("east 1", room34);
+        room33.AddDoor("south 1", room36);
+        room33.AddDoor("west 1", room30);
+        room34.AddDoor("north 1", room28);
+        room34.AddDoor("west 1", room33);
+        room34.AddDoor("south 1", room37);
+        room35.AddDoor("north 1", room29);
+        room35.AddDoor("south 1", room40);
+        room35.AddDoor("west 1", room38);
+        room36.AddDoor("north 1", room33);
+        room36.AddDoor("east 1", room37);
+        room36.AddDoor("west 1", room30);
+        room36.AddDoor("west 2", room30);
+        room37.AddDoor("north 1", room34);
+        room37.AddDoor("west 1", room36);
+        room37.AddDoor("west 2", room22);
+        room38.AddDoor("north 1", room31);
+        room38.AddDoor("east 1", room35);
+        room38.AddDoor("south 1", room35);
+        room39.AddDoor("north 1", room29);
+        room40.AddDoor("north 1", room30);
+        room40.AddDoor("west 1", room35);
+      }
+
+      void BuildItems()
+      {
+        Item rustySword = new Item("Rusty Sword", "A rusty old sword.");
+        room1.Items.Add(rustySword);
+
+      }
       CurrentRoom = room1;
     }
   }
