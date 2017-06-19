@@ -11,6 +11,8 @@ namespace CastleGrimtol.Game
     public Player()
     {
       CharacterName = NameCharacter();
+      Score = 0;
+      Inventory = new List<Item>();
     }
     public string NameCharacter()
     {
@@ -22,6 +24,10 @@ namespace CastleGrimtol.Game
       Console.WriteLine("Great! Your character is now named " + CharacterName + "\n");
       Console.ForegroundColor = ConsoleColor.White;
       return CharacterName;
+    }
+    public void ShowInventory(Player player)
+    {
+      // player.Inventory.ForEach()
     }
   }
 }

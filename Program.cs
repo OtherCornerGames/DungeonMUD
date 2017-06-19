@@ -19,28 +19,30 @@ namespace CastleGrimtol
 
       while (playing)
       {
-        string userAction = game.GetUserInput().ToLower();
-        Room nextRoom;
-        game.CurrentRoom.Exits.TryGetValue(userAction, out nextRoom);
 
-        if (userAction == "l" || userAction == "look")
+        string userChoice = game.GetUserInput().ToLower();
+        string[] userAction = userChoice.Split(' '); 
+        Room nextRoom;
+        game.CurrentRoom.Exits.TryGetValue(userAction[0], out nextRoom);
+
+        if (userAction[0] == "l" || userAction[0] == "look")
         {
           System.Console.WriteLine("\n");
           game.Look(game.CurrentRoom);
         }
-        else if (userAction == "h" || userAction == "help")
+        else if (userAction[0] == "h" || userAction[0] == "help")
         {
           game.Help();
         }
-        else if (userAction == "t" || userAction == "take")
+        else if (userAction[0] == "t" || userAction[0] == "take")
         {
-          System.Console.WriteLine("Take");
+          game.UseItem(userAction[2]);
         }
-        else if (userAction == "i" || userAction == "inventory")
+        else if (userAction[0] == "i" || userAction[0] == "inventory")
         {
           System.Console.WriteLine("Inventory");
         }
-        else if (userAction == "q" || userAction == "quit")
+        else if (userAction[0] == "q" || userAction[0] == "quit")
         {
           playing = game.Quit(playing);
         }
