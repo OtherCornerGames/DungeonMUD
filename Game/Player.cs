@@ -27,7 +27,11 @@ namespace CastleGrimtol.Game
     }
     public void ShowInventory(Player player)
     {
-      // player.Inventory.ForEach()
+      System.Console.WriteLine("Your inventory:\n");
+      for (int i = 0; i < player.Inventory.Count; i++)
+      {
+          System.Console.WriteLine($"{player.Inventory[i].Name}\n");
+      }
     }
   }
 }

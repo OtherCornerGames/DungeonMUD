@@ -36,12 +36,11 @@ namespace CastleGrimtol
         }
         else if (userAction[0] == "t" || userAction[0] == "take" && userAction[1] != null)
         {
-          System.Console.WriteLine(userAction[1]);
-          game.UseItem(userAction[1]);
+          game.TakeItem(userAction[1]);
         }
         else if (userAction[0] == "i" || userAction[0] == "inventory")
         {
-          System.Console.WriteLine("Inventory");
+          game.CurrentPlayer.ShowInventory(game.CurrentPlayer);
         }
         else if (userAction[0] == "q" || userAction[0] == "quit")
         {
@@ -51,6 +50,7 @@ namespace CastleGrimtol
         {
           game.CurrentRoom = nextRoom;
           System.Console.WriteLine("\n");
+          game.CurrentPlayer.Score += 10;
           game.Look(game.CurrentRoom);
         }
         else

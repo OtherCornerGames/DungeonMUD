@@ -27,7 +27,11 @@ namespace CastleGrimtol.Game
     {
 
     }
-    public void UseItem(string itemName)
+    public void UseItem(string ItemName)
+    {
+      
+    }
+    public void TakeItem(string itemName)
     {
       Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
       if(item != null)
@@ -53,11 +57,12 @@ namespace CastleGrimtol.Game
     public void Look(Room room)
     {
       Console.ForegroundColor = ConsoleColor.Cyan;
-      System.Console.WriteLine($"{room.Name}:\n{room.Description}");
+      System.Console.WriteLine($"{room.Name}:\n{room.Description}\nItems:\n");
       for (int i = 0; i < room.Items.Count; i++)
       {
-          System.Console.WriteLine($"Items: {room.Items[i].Name}\n");
+          System.Console.WriteLine($"{room.Items[i].Name}\n");
       }
+      System.Console.WriteLine($"Score: {CurrentPlayer.Score}");
       Console.ForegroundColor = ConsoleColor.White;
     }
     public void Help()
@@ -106,7 +111,7 @@ namespace CastleGrimtol.Game
       Room room38 = new Room("Room 38", "A stair ascends to a very unstable wooden platform in the east side of the room, A set of demonic war masks hangs on the east wall. Exits: North 1, East 1, South 1.\n");
       Room room39 = new Room("Room 39", "Lit candles are scattered across the floor, Someone has scrawled an arcane symbol on the east wall. Exits: North 1.\n");
       Room room40 = new Room("Room 40", "The south and west walls have been engraved with incoherent labyrinths, A shallow pool of oil lies in the east side of the room. Exits: North 1, West 1.\n");
-
+     
       BuildExits();
       BuildItems();
 
@@ -251,9 +256,10 @@ namespace CastleGrimtol.Game
 
       void BuildItems()
       {
-        Item rustySword = new Item("RustySword", "A rusty old sword.");
+        Item rustySword = new Item("Sword", "A rusty old sword.");
         room1.Items.Add(rustySword);
-
+        Item key = new Item("Key","A small Key.");
+        room1.Items.Add(key);
       }
       CurrentRoom = room1;
     }
