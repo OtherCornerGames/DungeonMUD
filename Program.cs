@@ -14,7 +14,7 @@ namespace CastleGrimtol
       game.Setup();
       game.BuildRooms();
       Console.ForegroundColor = ConsoleColor.Cyan;
-      System.Console.WriteLine($"{game.CurrentRoom.Name}:\n{game.CurrentRoom.Description}");
+      game.Look(game.CurrentRoom);
       Console.ForegroundColor = ConsoleColor.White;
 
       while (game.Playing)
