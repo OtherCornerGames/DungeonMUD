@@ -34,9 +34,10 @@ namespace CastleGrimtol
         {
           game.Help();
         }
-        else if (userAction[0] == "t" || userAction[0] == "take")
+        else if (userAction[0] == "t" || userAction[0] == "take" && userAction[1] != null)
         {
-          game.UseItem(userAction[2]);
+          System.Console.WriteLine(userAction[1]);
+          game.UseItem(userAction[1]);
         }
         else if (userAction[0] == "i" || userAction[0] == "inventory")
         {

@@ -29,7 +29,7 @@ namespace CastleGrimtol.Game
     }
     public void UseItem(string itemName)
     {
-      Item item = CurrentRoom.Items.Find(Item => Item.Name ==itemName);
+      Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
       if(item != null)
       {
       CurrentRoom.Items.Remove(item);
@@ -62,7 +62,7 @@ namespace CastleGrimtol.Game
     }
     public void Help()
     {
-      System.Console.WriteLine("Valid actions are direction number of the exit.\nEX: East 1 or e1.\nLOOK or l: which allows you to search the room for treasure, but you may disturb something...\nHELP or h: which displays this help list.\nTAKE or t: which takes an item and adds it to your inventory. EX: Take Gold.\nINVENTORY or i: Views the items in your inventory.\nQUIT or q: leaves the game.\n");
+      System.Console.WriteLine("Valid actions are:\nDirections first letter and number of the exit.\nEX: e1.\nLOOK or l: which allows you to search the room for treasure, but you may disturb something...\nHELP or h: which displays this help list.\nTAKE or t: which takes an item and adds it to your inventory. EX: Take Gold.\nINVENTORY or i: Views the items in your inventory.\nQUIT or q: leaves the game.\n");
     }
     public void BuildRooms()
     {
