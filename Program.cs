@@ -9,7 +9,7 @@ namespace CastleGrimtol
     public static void Main(string[] args)
     {
       Game.Game game = new Game.Game();
-      Boolean playing = true;
+      game.Playing = true;
 
       game.Setup();
       game.BuildRooms();
@@ -17,7 +17,7 @@ namespace CastleGrimtol
       System.Console.WriteLine($"{game.CurrentRoom.Name}:\n{game.CurrentRoom.Description}");
       Console.ForegroundColor = ConsoleColor.White;
 
-      while (playing)
+      while (game.Playing)
       {
 
         string userChoice = game.GetUserInput().ToLower();
@@ -44,7 +44,12 @@ namespace CastleGrimtol
         }
         else if (userAction[0] == "q" || userAction[0] == "quit")
         {
-          playing = game.Quit(playing);
+          game.Playing = game.Quit(game.Playing);
+        }
+        else if (userAction[0] == "u" || userAction[0] == "use")
+        {
+          game.UseItem(userAction[1]);
+          game.Look(game.CurrentRoom);
         }
         else if (nextRoom != null)
         {

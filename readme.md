@@ -18,11 +18,12 @@ To satisfy the interfaces you will need to ensure that your classes implement al
 
 Requirements:
 - `10 points`: The Basic Features of the game work
-  - `2 Go <Direction>` Moves the player from room to room
-  - `2 Use <ItemName>` Uses an item in a room or from your inventory
-  - `2 Take <ItemName>` Places an item into the player inventory and removes it from the room
-  - `2 Help` Shows a list of commands and actions
-  - `2 Quit` Quits the Game
+  - `2 Go <Direction>` Moves the player from room to room2
+  - `2 Use <ItemName>` Uses an item in a room or from your inventory2
+  - `2 Take <ItemName>` Places an item into the player inventory and removes it from the room2
+  - `2 Help` Shows a list of commands and actions2
+  - `2 Quit` Quits the Game2
+  10/10
 
 ### Step 2 - Control the Game Loop `Total Points: 10`
 
@@ -32,14 +33,14 @@ Your Game must implement the following features
 
 Requirements:
 - `10 points`: Game Needs
-  - `1`: You have at least 4 rooms
-  - `1`: You have at least 1 usable item
-  - `1`: You have at least 1 item that can be taken
-  - `1`: You are rewarded points for your efforts
-  - `1`: You can lose the game due to a bad decision
-  - `2`: You have at least 1 room that changes based on an item use
-  - `1`: When the player enters a room they get the room description
-  - `1`: The Player can see the items in their inventory
+  - `1`: You have at least 4 rooms1
+  - `1`: You have at least 1 usable item1
+  - `1`: You have at least 1 item that can be taken1
+  - `1`: You are rewarded points for your efforts1
+  - `1`: You can lose the game due to a bad decision1
+  - `2`: You have at least 1 room that changes based on an item use2
+  - `1`: When the player enters a room they get the room description1
+  - `1`: The Player can see the items in their inventory1
   - `1`: The Player can win the game
   
   

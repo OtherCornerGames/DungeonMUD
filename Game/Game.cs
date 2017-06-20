@@ -5,7 +5,9 @@ namespace CastleGrimtol.Game
 {
   public class Game : IGame
   {
+    public Boolean Playing { get; set; }
     public Room CurrentRoom { get; set; }
+    public List<Room> Rooms { get; set; }
     public Player CurrentPlayer { get; set; }
     public void Setup()
     {
@@ -15,6 +17,7 @@ namespace CastleGrimtol.Game
       Console.WriteLine("Welcome to the warrens of Emirkol the Chaotic!\n");
       Console.ForegroundColor = ConsoleColor.White;
       CurrentPlayer = new Player();
+      Rooms = new List<Room>();
       Help();
     }
     public string GetUserInput()
@@ -29,15 +32,39 @@ namespace CastleGrimtol.Game
     }
     public void UseItem(string ItemName)
     {
+      string MagicOrb = "orb";
+      string swordofLOSE = "sword";
+      string taco = "taco";
+      if (ItemName.ToLower() == MagicOrb)
+      {
+        CurrentRoom = Rooms[1];
+      }
+      if (ItemName.ToLower() == swordofLOSE)
+      {
+        Console.WriteLine("You swing the sword around with elegance. You feel like a true hero...as you go to sheathe the sword, you slip, fall, and find yourself a sheathe...a rather ineffective sheathe. Everything goes dim.....");
+        Console.ForegroundColor = ConsoleColor.Red;
+        System.Console.WriteLine("\nYOU LOSE!");
+        Console.ForegroundColor = ConsoleColor.White;
+        Playing = false;
+      }
+      if (ItemName.ToLower() == taco)
+      {
+        System.Console.WriteLine("As you begin to eat the taco he screams \"NOOOO I am Emirkol the Chaotic, all should fear me!\", you finish your tasty meal and realize, you have just vanquished Emirkol.");
+        Console.ForegroundColor = ConsoleColor.Green;
+        System.Console.WriteLine("\nYOU WIN!");
+        Console.ForegroundColor = ConsoleColor.White;        
+        Console.Read();
+        Playing = false;
+      }
       
     }
     public void TakeItem(string itemName)
     {
       Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
-      if(item != null)
+      if (item != null)
       {
-      CurrentRoom.Items.Remove(item);
-      CurrentPlayer.Inventory.Add(item);
+        CurrentRoom.Items.Remove(item);
+        CurrentPlayer.Inventory.Add(item);
       }
     }
     public Boolean Quit(Boolean playing)
@@ -60,7 +87,7 @@ namespace CastleGrimtol.Game
       System.Console.WriteLine($"{room.Name}:\n{room.Description}\nItems:\n");
       for (int i = 0; i < room.Items.Count; i++)
       {
-          System.Console.WriteLine($"{room.Items[i].Name}\n");
+        System.Console.WriteLine($"{room.Items[i].Name}\n");
       }
       System.Console.WriteLine($"Score: {CurrentPlayer.Score}");
       Console.ForegroundColor = ConsoleColor.White;
@@ -71,6 +98,7 @@ namespace CastleGrimtol.Game
     }
     public void BuildRooms()
     {
+      Room room0 = new Room("Room 0", "A mishapen cavern mostly made of crude stonework, it does not appear to go anywhere...You start to regret ever trying to enter the Warrens.");
       Room room1 = new Room("Room 1", "Spirals of green stones cover the floor, A circle of tall stones stands in the east side of the room. Exits: East 1, East 2, South 1, South 2.\n");
       Room room2 = new Room("Room 2", "An altar of evil sits in the center of the room. You notice a pile of iron spikes lies in the north side of the room. Exits: West 1, East 1, East 2.\n");
       Room room3 = new Room("Room 3", "Someone has scrawled \"Run Away!\" in goblin runes on the north wall, Several pieces of trash are also strewn about the room. Exits: West 1, East 1, East 2, East 3, South 1.\n");
@@ -111,10 +139,16 @@ namespace CastleGrimtol.Game
       Room room38 = new Room("Room 38", "A stair ascends to a very unstable wooden platform in the east side of the room, A set of demonic war masks hangs on the east wall. Exits: North 1, East 1, South 1.\n");
       Room room39 = new Room("Room 39", "Lit candles are scattered across the floor, Someone has scrawled an arcane symbol on the east wall. Exits: North 1.\n");
       Room room40 = new Room("Room 40", "The south and west walls have been engraved with incoherent labyrinths, A shallow pool of oil lies in the east side of the room. Exits: North 1, West 1.\n");
-     
+
+      AddRooms();
       BuildExits();
       BuildItems();
 
+      void AddRooms()
+      {
+        Rooms.Add(room0);
+        Rooms.Add(room1);
+      }
       void BuildExits()
       {
         room1.AddDoor("e1", room2);
@@ -257,11 +291,13 @@ namespace CastleGrimtol.Game
       void BuildItems()
       {
         Item rustySword = new Item("Sword", "A rusty old sword.");
-        room1.Items.Add(rustySword);
-        Item key = new Item("Key","A small Key.");
-        room1.Items.Add(key);
+        room0.Items.Add(rustySword);
+        Item smallOrb = new Item("Orb", "A small orb, probably some kids marble, dang kids....always getting into chaos.");
+        room0.Items.Add(smallOrb);
+        Item taco = new Item("taco", "A Delicious taco.");
+        room40.Items.Add(taco);
       }
-      CurrentRoom = room1;
+      CurrentRoom = room0;
     }
   }
 }

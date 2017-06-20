@@ -30,7 +30,7 @@ namespace CastleGrimtol.Game
       System.Console.WriteLine("Your inventory:\n");
       for (int i = 0; i < player.Inventory.Count; i++)
       {
-          System.Console.WriteLine($"{player.Inventory[i].Name}\n");
+          System.Console.WriteLine($"{player.Inventory[i].Name}\n{player.Inventory[i].Description}");
       }
     }
   }
