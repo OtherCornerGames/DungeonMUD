@@ -28,7 +28,14 @@ namespace CastleGrimtol.Game
     }
     public void Reset()
     {
+      Playing = true;
 
+      Setup();
+      BuildRooms();
+      Console.ForegroundColor = ConsoleColor.Cyan;
+      Look(CurrentRoom);
+      // System.Console.WriteLine($"{CurrentRoom.Name}:\n{CurrentRoom.Description}");
+      Console.ForegroundColor = ConsoleColor.White;
     }
     public void UseItem(string ItemName)
     {
@@ -45,16 +52,33 @@ namespace CastleGrimtol.Game
         Console.ForegroundColor = ConsoleColor.Red;
         System.Console.WriteLine("\nYOU LOSE!");
         Console.ForegroundColor = ConsoleColor.White;
+        System.Console.WriteLine("Do you want to play again?Y/N");
+        string input = Console.ReadLine().ToLower();
+        if(input == "y")
+        {
+          Reset();   
+        }
+        if(input == "n")
+        {
         Playing = false;
+        }
       }
       if (ItemName.ToLower() == taco)
       {
         System.Console.WriteLine("As you begin to eat the taco he screams \"NOOOO I am Emirkol the Chaotic, all should fear me!\", you finish your tasty meal and realize, you have just vanquished Emirkol.");
         Console.ForegroundColor = ConsoleColor.Green;
         System.Console.WriteLine("\nYOU WIN!");
-        Console.ForegroundColor = ConsoleColor.White;        
-        Console.Read();
+        Console.ForegroundColor = ConsoleColor.White;
+         System.Console.WriteLine("Do you want to play again?Y/N");
+        string input = Console.ReadLine().ToLower();
+        if(input == "y")
+        {
+          Reset();   
+        }
+        if(input == "n")
+        {
         Playing = false;
+        }        
       }
       
     }
