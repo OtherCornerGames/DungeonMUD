@@ -32,55 +32,65 @@ namespace CastleGrimtol.Game
 
       Setup();
       BuildRooms();
-      Console.ForegroundColor = ConsoleColor.Cyan;
-      Look(CurrentRoom);
-      // System.Console.WriteLine($"{CurrentRoom.Name}:\n{CurrentRoom.Description}");
-      Console.ForegroundColor = ConsoleColor.White;
     }
-    public void UseItem(string ItemName)
+    public void UseItem(string itemName)
     {
+      //not needed but just for fun to identify items
       string MagicOrb = "orb";
-      string swordofLOSE = "sword";
-      string taco = "taco";
-      if (ItemName.ToLower() == MagicOrb)
+      string SwordOfLOSE = "sword";
+      string EmirkolTaco = "taco";
+
+      Item item = CurrentPlayer.Inventory.Find(Item => Item.Name.ToLower() == itemName);
+
+      if (item != null && item.Name.ToLower() == MagicOrb)
       {
+        Console.ForegroundColor = ConsoleColor.Green;
+        System.Console.WriteLine("\nA loud bang and a brilliant flash! You implode and then immediately reassemble, dazed, but seemingly whole. You realize you have found the way in...\n");
+        Console.ForegroundColor = ConsoleColor.White;
         CurrentRoom = Rooms[1];
       }
-      if (ItemName.ToLower() == swordofLOSE)
+      if (item != null && item.Name.ToLower() == SwordOfLOSE)
       {
-        Console.WriteLine("You swing the sword around with elegance. You feel like a true hero...as you go to sheathe the sword, you slip, fall, and find yourself a sheathe...a rather ineffective sheathe. Everything goes dim.....");
-        Console.ForegroundColor = ConsoleColor.Red;
-        System.Console.WriteLine("\nYOU LOSE!");
-        Console.ForegroundColor = ConsoleColor.White;
-        System.Console.WriteLine("Do you want to play again?Y/N");
-        string input = Console.ReadLine().ToLower();
-        if(input == "y")
-        {
-          Reset();   
-        }
-        if(input == "n")
-        {
-        Playing = false;
-        }
-      }
-      if (ItemName.ToLower() == taco)
-      {
-        System.Console.WriteLine("As you begin to eat the taco he screams \"NOOOO I am Emirkol the Chaotic, all should fear me!\", you finish your tasty meal and realize, you have just vanquished Emirkol.");
         Console.ForegroundColor = ConsoleColor.Green;
-        System.Console.WriteLine("\nYOU WIN!");
+        Console.WriteLine("\nYou swing the sword around with elegance. You feel like a true hero...as you go to sheathe the sword, you slip, fall, and end up using your chest as a sheathe...a rather ineffective sheathe. Everything goes dim.....\n");
+        Console.ForegroundColor = ConsoleColor.Red;
+        System.Console.WriteLine("YOU LOSE!\n");
         Console.ForegroundColor = ConsoleColor.White;
-         System.Console.WriteLine("Do you want to play again?Y/N");
+        System.Console.WriteLine("Do you want to play again?Y/N\n");
         string input = Console.ReadLine().ToLower();
-        if(input == "y")
+        if (input == "y")
         {
-          Reset();   
+          Reset();
         }
-        if(input == "n")
+        if (input == "n")
         {
-        Playing = false;
-        }        
+          Playing = false;
+        }
       }
-      
+      if (item != null && item.Name.ToLower() == EmirkolTaco)
+      {
+        Console.ForegroundColor = ConsoleColor.Green;
+        System.Console.WriteLine("\nAs you begin to eat the taco he screams \"NOOOO I am Emirkol the Chaotic, all should fear me!\", you finish your tasty meal and realize, you have just vanquished Emirkol.\n");
+        Console.ForegroundColor = ConsoleColor.Green;
+        System.Console.WriteLine("YOU WIN!\n");
+        Console.ForegroundColor = ConsoleColor.White;
+        System.Console.WriteLine("Do you want to play again?Y/N\n");
+        string input = Console.ReadLine().ToLower();
+        if (input == "y")
+        {
+          Reset();
+        }
+        if (input == "n")
+        {
+          Playing = false;
+        }
+      }
+      if(item == null)
+      {
+        Console.ForegroundColor = ConsoleColor.Red;
+        System.Console.WriteLine("\nInsufficient IQ allocation. Try something that makes more sense.\n");
+        Console.ForegroundColor = ConsoleColor.White;
+      }
     }
     public void TakeItem(string itemName)
     {
@@ -89,6 +99,7 @@ namespace CastleGrimtol.Game
       {
         CurrentRoom.Items.Remove(item);
         CurrentPlayer.Inventory.Add(item);
+        CurrentPlayer.ShowInventory(CurrentPlayer);
       }
     }
     public Boolean Quit(Boolean playing)
@@ -108,21 +119,27 @@ namespace CastleGrimtol.Game
     public void Look(Room room)
     {
       Console.ForegroundColor = ConsoleColor.Cyan;
-      System.Console.WriteLine($"{room.Name}:\n{room.Description}\nItems:\n");
+      System.Console.WriteLine($"{room.Name}:\n{room.Description}\n");
+      Console.ForegroundColor = ConsoleColor.DarkGreen;
+      System.Console.WriteLine("Items:\n");
       for (int i = 0; i < room.Items.Count; i++)
       {
-        System.Console.WriteLine($"{room.Items[i].Name}\n");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        System.Console.WriteLine($"{room.Items[i].Name}");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        System.Console.WriteLine($"{room.Items[i].Description}\n");
       }
-      System.Console.WriteLine($"Score: {CurrentPlayer.Score}");
+      Console.ForegroundColor = ConsoleColor.Blue;
+      System.Console.WriteLine($"Score: {CurrentPlayer.Score}\n");
       Console.ForegroundColor = ConsoleColor.White;
     }
     public void Help()
     {
-      System.Console.WriteLine("Valid actions are:\nDirections first letter and number of the exit.\nEX: e1.\nLOOK or l: which allows you to search the room for treasure, but you may disturb something...\nHELP or h: which displays this help list.\nTAKE or t: which takes an item and adds it to your inventory. EX: Take Gold.\nINVENTORY or i: Views the items in your inventory.\nQUIT or q: leaves the game.\n");
+      System.Console.WriteLine("Valid actions are:\nMovement: First letter of the direction and number of the exit.\nEX: Exits: East 1 = e1.\nLOOK or l: which allows you to search the room for treasure, but you may disturb something...\nHELP or h: which displays this help list.\nTAKE or t: which takes an item and adds it to your inventory. EX: Take sword\nINVENTORY or i: Views the items in your inventory.\nUSE or u: uses an item. EX: use sword\nQUIT or q: leaves the game.\n");
     }
     public void BuildRooms()
     {
-      Room room0 = new Room("Room 0", "A mishapen cavern mostly made of crude stonework, it does not appear to go anywhere...You start to regret ever trying to enter the Warrens.");
+      Room room0 = new Room("Room 0", "A mishapen cavern mostly made of crude stonework, it does not appear to go anywhere...You start to regret ever trying to enter the Warrens. Exits: None, how did you get here?!");
       Room room1 = new Room("Room 1", "Spirals of green stones cover the floor, A circle of tall stones stands in the east side of the room. Exits: East 1, East 2, South 1, South 2.\n");
       Room room2 = new Room("Room 2", "An altar of evil sits in the center of the room. You notice a pile of iron spikes lies in the north side of the room. Exits: West 1, East 1, East 2.\n");
       Room room3 = new Room("Room 3", "Someone has scrawled \"Run Away!\" in goblin runes on the north wall, Several pieces of trash are also strewn about the room. Exits: West 1, East 1, East 2, East 3, South 1.\n");
@@ -314,11 +331,11 @@ namespace CastleGrimtol.Game
 
       void BuildItems()
       {
-        Item rustySword = new Item("Sword", "A rusty old sword.");
+        Item rustySword = new Item("Sword", "A rusty old sword. Looks like it once was battle ready, but probably not anymore.");
         room0.Items.Add(rustySword);
         Item smallOrb = new Item("Orb", "A small orb, probably some kids marble, dang kids....always getting into chaos.");
         room0.Items.Add(smallOrb);
-        Item taco = new Item("taco", "A Delicious taco.");
+        Item taco = new Item("Taco", "A Delicious taco. Are you hungry?");
         room40.Items.Add(taco);
       }
       CurrentRoom = room0;

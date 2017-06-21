@@ -60,7 +60,9 @@ namespace CastleGrimtol
         }
         else
         {
-          System.Console.WriteLine("After attempting...you realize this is not the action you wanted to take. You should try again.\n");
+          Console.ForegroundColor = ConsoleColor.Red;
+          System.Console.WriteLine("\nAfter attempting...you realize this is not the action you wanted to take. You should try again.\n");
+          Console.ForegroundColor = ConsoleColor.White;
         }
       }
     }

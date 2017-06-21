@@ -41,7 +41,7 @@ Requirements:
   - `2`: You have at least 1 room that changes based on an item use2
   - `1`: When the player enters a room they get the room description1
   - `1`: The Player can see the items in their inventory1
-  - `1`: The Player can win the game
+  - `1`: The Player can win the game1
   
   
 ### BONUS - Some enhancing features `Total Points: 5`

@@ -21,16 +21,21 @@ namespace CastleGrimtol.Game
       Console.ForegroundColor = ConsoleColor.Red;
       string CharacterName = Console.ReadLine();
       Console.ForegroundColor = ConsoleColor.Blue;
-      Console.WriteLine("Great! Your character is now named " + CharacterName + "\n");
+      Console.WriteLine("\nGreat! Your character is now named " + CharacterName + "\n");
       Console.ForegroundColor = ConsoleColor.White;
       return CharacterName;
     }
     public void ShowInventory(Player player)
     {
-      System.Console.WriteLine("Your inventory:\n");
+      Console.ForegroundColor = ConsoleColor.Yellow;
+      System.Console.WriteLine("\nYour inventory:\n");
       for (int i = 0; i < player.Inventory.Count; i++)
       {
-          System.Console.WriteLine($"{player.Inventory[i].Name}\n{player.Inventory[i].Description}");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        System.Console.WriteLine($"{player.Inventory[i].Name}");
+        Console.ForegroundColor = ConsoleColor.Magenta;        
+        System.Console.WriteLine($"{player.Inventory[i].Description}\n");
+        Console.ForegroundColor = ConsoleColor.White;
       }
     }
   }
