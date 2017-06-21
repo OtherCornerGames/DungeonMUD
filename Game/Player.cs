@@ -35,8 +35,8 @@ namespace CastleGrimtol.Game
         System.Console.WriteLine($"{player.Inventory[i].Name}");
         Console.ForegroundColor = ConsoleColor.Magenta;        
         System.Console.WriteLine($"{player.Inventory[i].Description}\n");
-        Console.ForegroundColor = ConsoleColor.White;
       }
+        Console.ForegroundColor = ConsoleColor.White;
     }
   }
 }
