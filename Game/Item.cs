@@ -12,9 +12,5 @@ namespace CastleGrimtol.Game
       Name = name;
       Description = description;
     }
-    public void CreateRandom()
-    {
-      
-    }
   }
 }

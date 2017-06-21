@@ -139,7 +139,7 @@ namespace CastleGrimtol.Game
     }
     public void BuildRooms()
     {
-      Room room0 = new Room("Room 0", "A mishapen cavern mostly made of crude stonework, it does not appear to go anywhere...You start to regret ever trying to enter the Warrens. Exits: None, how did you get here?!");
+      Room room0 = new Room("Room 0", "A mishapen cavern mostly made of crude stonework, it does not appear to go anywhere...You start to regret ever trying to enter the Warrens. Exits: No obvious exits...wait, how did you get here?!");
       Room room1 = new Room("Room 1", "Spirals of green stones cover the floor, A circle of tall stones stands in the east side of the room. Exits: East 1, East 2, South 1, South 2.\n");
       Room room2 = new Room("Room 2", "An altar of evil sits in the center of the room. You notice a pile of iron spikes lies in the north side of the room. Exits: West 1, East 1, East 2.\n");
       Room room3 = new Room("Room 3", "Someone has scrawled \"Run Away!\" in goblin runes on the north wall, Several pieces of trash are also strewn about the room. Exits: West 1, East 1, East 2, East 3, South 1.\n");
@@ -188,7 +188,45 @@ namespace CastleGrimtol.Game
       void AddRooms()
       {
         Rooms.Add(room0);
-        Rooms.Add(room1);
+        Rooms.Add(room2);
+        Rooms.Add(room3);
+        Rooms.Add(room4);
+        Rooms.Add(room5);
+        Rooms.Add(room6);
+        Rooms.Add(room7);
+        Rooms.Add(room8);
+        Rooms.Add(room9);
+        Rooms.Add(room10);
+        Rooms.Add(room11);
+        Rooms.Add(room12);
+        Rooms.Add(room13);
+        Rooms.Add(room14);
+        Rooms.Add(room15);
+        Rooms.Add(room16);
+        Rooms.Add(room17);
+        Rooms.Add(room18);
+        Rooms.Add(room19);
+        Rooms.Add(room20);
+        Rooms.Add(room21);
+        Rooms.Add(room22);
+        Rooms.Add(room23);
+        Rooms.Add(room24);
+        Rooms.Add(room25);
+        Rooms.Add(room26);
+        Rooms.Add(room27);
+        Rooms.Add(room28);
+        Rooms.Add(room29);
+        Rooms.Add(room30);
+        Rooms.Add(room31);
+        Rooms.Add(room32);
+        Rooms.Add(room33);
+        Rooms.Add(room34);
+        Rooms.Add(room35);
+        Rooms.Add(room36);
+        Rooms.Add(room37);
+        Rooms.Add(room38);
+        Rooms.Add(room39);
+        Rooms.Add(room40);
       }
       void BuildExits()
       {
