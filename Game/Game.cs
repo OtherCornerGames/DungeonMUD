@@ -70,9 +70,9 @@ namespace CastleGrimtol.Game
       if (item != null && item.Name.ToLower() == EmirkolTaco)
       {
         Console.ForegroundColor = ConsoleColor.Green;
-        System.Console.WriteLine("\nAs you begin to eat the taco he screams \"NOOOO I am Emirkol the Chaotic, all should fear me!\", you finish your tasty meal and realize, you have just vanquished Emirkol.\n");
+        System.Console.WriteLine("\nAs you begin to eat the taco he screams \"NOOOO I am Emirkol the Chaotic, all should fear me!\", you finish your tasty meal and realize, you have just vanquished Emirkol the chaotic.\n");
         Console.ForegroundColor = ConsoleColor.Green;
-        System.Console.WriteLine("YOU WIN!\n");
+        System.Console.WriteLine("You now proclaim these halls the Warrens of " + CurrentPlayer.CharacterName+", the Not-So-Hungry-Anymore. YOU WIN!\n");
         Console.ForegroundColor = ConsoleColor.White;
         System.Console.WriteLine("Do you want to play again?Y/N\n");
         string input = Console.ReadLine().ToLower();
@@ -188,6 +188,7 @@ namespace CastleGrimtol.Game
       void AddRooms()
       {
         Rooms.Add(room0);
+        Rooms.Add(room1);
         Rooms.Add(room2);
         Rooms.Add(room3);
         Rooms.Add(room4);
