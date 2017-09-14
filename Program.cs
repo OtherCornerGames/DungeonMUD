@@ -56,7 +56,7 @@ namespace CastleGrimtol
         {
           game.CurrentRoom = nextRoom;
           System.Console.WriteLine("\n");
-          
+          game.Encounter();
           game.CurrentPlayer.Score += 10;
           game.Look(game.CurrentRoom);
         }

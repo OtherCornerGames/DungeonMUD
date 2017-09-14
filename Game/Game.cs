@@ -7,7 +7,6 @@ namespace CastleGrimtol.Game
   {
     public Boolean Playing { get; set; }
     public Room CurrentRoom { get; set; }
-    public Monster CurrentMonster { get; set; }
     public List<Room> Rooms { get; set; }
     public Player CurrentPlayer { get; set; }
     public Dictionary<string, Monster> Monsters = new Dictionary<string, Monster>();
@@ -398,13 +397,17 @@ namespace CastleGrimtol.Game
       }
       AddMonsters();
     }
-    private void Encounter()
+    public void Encounter()
     {
       Random rnd = new Random();
       int monsterNumber = rnd.Next(1, 5);
       Monster monster;
       Monsters.TryGetValue("monster" + monsterNumber.ToString(), out monster);
-      CurrentMonster = monster;
+      Fight(monster);
+    }
+    private void Fight(Monster monster)
+    {
+      System.Console.WriteLine("Monster:\n"+$"{monster.Name}\nHealth: {monster.Health}\nAttack: {monster.Attack}");
     }
   }
 }
