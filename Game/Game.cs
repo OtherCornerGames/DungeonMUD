@@ -7,6 +7,7 @@ namespace CastleGrimtol.Game
   {
     public Boolean Playing { get; set; }
     public Room CurrentRoom { get; set; }
+    public Monster CurrentMonster { get; set; }
     public List<Room> Rooms { get; set; }
     public Player CurrentPlayer { get; set; }
     public Dictionary<string, Monster> Monsters = new Dictionary<string, Monster>();
@@ -74,7 +75,7 @@ namespace CastleGrimtol.Game
         Console.ForegroundColor = ConsoleColor.Green;
         System.Console.WriteLine("\nAs you begin to eat the taco he screams \"NOOOO I am Emirkol the Chaotic, all should fear me!\", you finish your tasty meal and realize, you have just vanquished Emirkol the chaotic.\n");
         Console.ForegroundColor = ConsoleColor.Green;
-        System.Console.WriteLine("You now proclaim these halls the Warrens of " + CurrentPlayer.CharacterName+", the Not-So-Hungry-Anymore. YOU WIN!\n");
+        System.Console.WriteLine("You now proclaim these halls the Warrens of " + CurrentPlayer.CharacterName + ", the Not-So-Hungry-Anymore. YOU WIN!\n");
         Console.ForegroundColor = ConsoleColor.White;
         System.Console.WriteLine("Do you want to play again?Y/N\n");
         string input = Console.ReadLine().ToLower();
@@ -87,7 +88,7 @@ namespace CastleGrimtol.Game
           Playing = false;
         }
       }
-      if(item == null)
+      if (item == null)
       {
         Console.ForegroundColor = ConsoleColor.Red;
         System.Console.WriteLine("\nInsufficient IQ allocation. Try something that makes more sense.\n");
@@ -381,19 +382,29 @@ namespace CastleGrimtol.Game
       }
       CurrentRoom = room0;
     }
-    public void BuildMonsters(){
-      Monster goblin1 = new Monster("Bob the goblin", 10, 20);
-      Monster goblin2 = new Monster("Bill the goblin", 12, 25);
-      Monster goblin3 = new Monster("George the goblin", 5, 10);
-      Monster goblin4 = new Monster("Harry the goblin", 1, 30);
-      
-      void AddMonsters(){
-        Monsters.Add("Bob", goblin1);
-        Monsters.Add("Bill", goblin2);
-        Monsters.Add("George", goblin3);
-        Monsters.Add("Harry", goblin4);
+    public void BuildMonsters()
+    {
+      Monster monster1 = new Monster("Bob the goblin", 10, 20);
+      Monster monster2 = new Monster("Bill the goblin", 12, 25);
+      Monster monster3 = new Monster("George the goblin", 5, 10);
+      Monster monster4 = new Monster("Harry the goblin", 1, 30);
+
+      void AddMonsters()
+      {
+        Monsters.Add("monster1", monster1);
+        Monsters.Add("monster2", monster2);
+        Monsters.Add("monster3", monster3);
+        Monsters.Add("monster4", monster4);
       }
       AddMonsters();
+    }
+    private void Encounter()
+    {
+      Random rnd = new Random();
+      int monsterNumber = rnd.Next(1, 5);
+      Monster monster;
+      Monsters.TryGetValue("monster" + monsterNumber.ToString(), out monster);
+      CurrentMonster = monster;
     }
   }
 }
