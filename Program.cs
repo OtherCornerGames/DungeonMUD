@@ -10,9 +10,10 @@ namespace CastleGrimtol
     {
       Game.Game game = new Game.Game();
       game.Playing = true;
-
       game.Setup();
       game.BuildRooms();
+      game.BuildMonsters();
+
       Console.ForegroundColor = ConsoleColor.Cyan;
       game.Look(game.CurrentRoom);
       Console.ForegroundColor = ConsoleColor.White;
@@ -55,6 +56,7 @@ namespace CastleGrimtol
         {
           game.CurrentRoom = nextRoom;
           System.Console.WriteLine("\n");
+          
           game.CurrentPlayer.Score += 10;
           game.Look(game.CurrentRoom);
         }

@@ -9,6 +9,7 @@ namespace CastleGrimtol.Game
     public string Description { get; set; }
     public List<Item> Items { get; set; }
     public Dictionary<string, Room> Exits = new Dictionary<string, Room>();
+    public Dictionary<string, Monster> Monsters = new Dictionary<string, Monster>();
     public Room(string name, string description)
     {
       Name = name;
@@ -18,6 +19,10 @@ namespace CastleGrimtol.Game
     public void AddDoor(string direction, Room room)
     {
       Exits.Add(direction, room);
+    }
+    public void AddMonster(string name, Monster monster)
+    {
+      Monsters.Add(name, monster);
     }
     public void UseItem(Item item)
     {

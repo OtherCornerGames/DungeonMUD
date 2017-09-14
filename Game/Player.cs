@@ -7,11 +7,15 @@ namespace CastleGrimtol.Game
   {
     public string CharacterName;
     public int Score { get; set; }
+    public int Health { get; set; }
+    public int Attack { get; set; }
     public List<Item> Inventory { get; set; }
     public Player()
     {
       CharacterName = NameCharacter();
       Score = 0;
+      Health = 100;
+      Attack = 0;
       Inventory = new List<Item>();
     }
     public string NameCharacter()

@@ -9,6 +9,8 @@ namespace CastleGrimtol.Game
     public Room CurrentRoom { get; set; }
     public List<Room> Rooms { get; set; }
     public Player CurrentPlayer { get; set; }
+    public Dictionary<string, Monster> Monsters = new Dictionary<string, Monster>();
+
     public void Setup()
     {
       Console.Clear();
@@ -378,6 +380,20 @@ namespace CastleGrimtol.Game
         room40.Items.Add(taco);
       }
       CurrentRoom = room0;
+    }
+    public void BuildMonsters(){
+      Monster goblin1 = new Monster("Bob the goblin", 10, 20);
+      Monster goblin2 = new Monster("Bill the goblin", 12, 25);
+      Monster goblin3 = new Monster("George the goblin", 5, 10);
+      Monster goblin4 = new Monster("Harry the goblin", 1, 30);
+      
+      void AddMonsters(){
+        Monsters.Add("Bob", goblin1);
+        Monsters.Add("Bill", goblin2);
+        Monsters.Add("George", goblin3);
+        Monsters.Add("Harry", goblin4);
+      }
+      AddMonsters();
     }
   }
 }
