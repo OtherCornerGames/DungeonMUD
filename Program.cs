@@ -55,11 +55,11 @@ namespace CastleGrimtol
         {
           Random rnd = new Random();
           int chance = rnd.Next(1, 101);
-
-          game.CurrentRoom = nextRoom;
-          System.Console.WriteLine("\n");
           if (chance > 50)
           {
+            Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine("\nYou are under Attack!\n");
+            Console.ForegroundColor = ConsoleColor.White;
             game.Encounter();
           }
           if (!game.Playing)
@@ -68,6 +68,7 @@ namespace CastleGrimtol
           }
           else
           {
+            game.CurrentRoom = nextRoom;
             game.CurrentPlayer.Score += 10;
             game.Look(game.CurrentRoom);
           }

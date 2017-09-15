@@ -411,8 +411,11 @@ namespace CastleGrimtol.Game
       Boolean fighting = true;
       while (fighting)
       {
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
         System.Console.WriteLine($"{monster.Name}\nHealth: {monster.Health}\nAttack: {monster.Attack}\n");
+        Console.ForegroundColor = ConsoleColor.Green;        
         System.Console.WriteLine($"{CurrentPlayer.CharacterName}:\nHealth: {CurrentPlayer.Health}\nAttack: {CurrentPlayer.Attack}\n");
+        Console.ForegroundColor = ConsoleColor.White;        
         System.Console.WriteLine("\nDo you want to attack, or heal? A/H?");
         string userChoice = Console.ReadLine().ToLower();
         if (userChoice == "h" || userChoice == "heal")
@@ -458,7 +461,7 @@ namespace CastleGrimtol.Game
         Random rnd = new Random();
         int value = rnd.Next(1, CurrentPlayer.Attack);
         currentMonster.Health -= value;
-        Console.ForegroundColor = ConsoleColor.Red;
+        Console.ForegroundColor = ConsoleColor.Green;
         System.Console.WriteLine($"\nYou hit {currentMonster.Name} for {value} damage.\n");
         Console.ForegroundColor = ConsoleColor.White;
       }
@@ -467,7 +470,7 @@ namespace CastleGrimtol.Game
         Random rnd = new Random();
         int value = rnd.Next(1, currentMonster.Attack);
         CurrentPlayer.Health -= value;
-        Console.ForegroundColor = ConsoleColor.Red;
+        Console.ForegroundColor = ConsoleColor.DarkMagenta;
         System.Console.WriteLine($"\nYou are hit by {currentMonster.Name} for {value} damage.\n");
         Console.ForegroundColor = ConsoleColor.White;
       }
