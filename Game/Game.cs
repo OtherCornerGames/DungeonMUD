@@ -401,48 +401,31 @@ namespace CastleGrimtol.Game
     {
       Random rnd = new Random();
       int monsterNumber = rnd.Next(1, 5);
-      Monster monster;
-      Monsters.TryGetValue("monster" + monsterNumber.ToString(), out monster);
-      Fight(monster);
+      Monster baseMonster;
+      Monsters.TryGetValue("monster" + monsterNumber.ToString(), out baseMonster);
+      Monster tempMonster = new Monster(baseMonster.Name, 50, baseMonster.Health);
+      Fight(tempMonster);
     }
     private void Fight(Monster monster)
     {
       Boolean fighting = true;
-      while (fighting){
-        if(monster.Health == 0)
-        {
-          Console.ForegroundColor = ConsoleColor.Green;
-          System.Console.WriteLine($"{monster.Name} has died.");
-          Console.ForegroundColor = ConsoleColor.White;
-        }
-        if(CurrentPlayer.Health == 0)
-        {
-          Console.ForegroundColor = ConsoleColor.DarkRed;
-          System.Console.WriteLine($"{CurrentPlayer.CharacterName} has died.\n");
-          Console.ForegroundColor = ConsoleColor.White;
-          System.Console.WriteLine("Do you want to play again?Y/N\n");
-          string input = Console.ReadLine().ToLower();
-          if (input == "y")
-          {
-            Reset();
-          }
-          if (input == "n")
-          {
-            Playing = false;
-          }
-        }
-      System.Console.WriteLine($"{monster.Name}\nHealth: {monster.Health}\nAttack: {monster.Attack}\n");
-      System.Console.WriteLine($"{CurrentPlayer.CharacterName}:\nHealth: {CurrentPlayer.Health}\nAttack: {CurrentPlayer.Attack}\n");
-      string userChoice = System.Console.WriteLine("\nDo you want to attack, or heal? A/H?").ToLower();
-       if (userChoice == "h" || userChoice == "heal")
+      while (fighting)
+      {
+        System.Console.WriteLine($"{monster.Name}\nHealth: {monster.Health}\nAttack: {monster.Attack}\n");
+        System.Console.WriteLine($"{CurrentPlayer.CharacterName}:\nHealth: {CurrentPlayer.Health}\nAttack: {CurrentPlayer.Attack}\n");
+        System.Console.WriteLine("\nDo you want to attack, or heal? A/H?");
+        string userChoice = Console.ReadLine().ToLower();
+        if (userChoice == "h" || userChoice == "heal")
         {
           Heal();
           MonsterAttack(monster);
+          Results();
         }
         if (userChoice == "a" || userChoice == "attack")
         {
           Attack(monster);
-          MonsterAttack(monster);          
+          MonsterAttack(monster);
+          Results();
         }
         else
         {
@@ -455,28 +438,70 @@ namespace CastleGrimtol.Game
       {
         Random rnd = new Random();
         int value = rnd.Next(1, 15);
-        CurrentPlayer.Health += value;
-        Console.ForegroundColor = ConsoleColor.Blue;        
-        System.Console.WriteLine($"\nYou are healed for {value} health.\n");
-        Console.ForegroundColor = ConsoleColor.White;        
+        if (CurrentPlayer.Health + value > 100)
+        {
+          CurrentPlayer.Health = 100;
+          Console.ForegroundColor = ConsoleColor.Blue;
+          System.Console.WriteLine($"\nYou are fully healed {value} health.\n");
+          Console.ForegroundColor = ConsoleColor.White;
+        }
+        else
+        {
+          CurrentPlayer.Health += value;
+          Console.ForegroundColor = ConsoleColor.Blue;
+          System.Console.WriteLine($"\nYou are healed for {value} health.\n");
+          Console.ForegroundColor = ConsoleColor.White;
+        }
       }
       void Attack(Monster currentMonster)
       {
         Random rnd = new Random();
         int value = rnd.Next(1, CurrentPlayer.Attack);
         currentMonster.Health -= value;
-        Console.ForegroundColor = ConsoleColor.Red;        
+        Console.ForegroundColor = ConsoleColor.Red;
         System.Console.WriteLine($"\nYou hit {currentMonster.Name} for {value} damage.\n");
-        Console.ForegroundColor = ConsoleColor.White;                
+        Console.ForegroundColor = ConsoleColor.White;
       }
       void MonsterAttack(Monster currentMonster)
       {
         Random rnd = new Random();
         int value = rnd.Next(1, currentMonster.Attack);
         CurrentPlayer.Health -= value;
-        Console.ForegroundColor = ConsoleColor.Red;        
+        Console.ForegroundColor = ConsoleColor.Red;
         System.Console.WriteLine($"\nYou are hit by {currentMonster.Name} for {value} damage.\n");
-        Console.ForegroundColor = ConsoleColor.White; 
+        Console.ForegroundColor = ConsoleColor.White;
+      }
+      void Results()
+      {
+        Boolean answer = false;
+        if (monster.Health <= 0)
+        {
+          Console.ForegroundColor = ConsoleColor.Green;
+          System.Console.WriteLine($"{monster.Name} has died.\n");
+          Console.ForegroundColor = ConsoleColor.White;
+          fighting = false;
+        }
+        if (CurrentPlayer.Health <= 0)
+        {
+          Console.ForegroundColor = ConsoleColor.DarkRed;
+          System.Console.WriteLine($"{CurrentPlayer.CharacterName} has died.\n");
+          Console.ForegroundColor = ConsoleColor.White;
+          while (!answer)
+          {
+            System.Console.WriteLine("Do you want to play again?Y/N\n");
+            string input = Console.ReadLine().ToLower();
+            if (input == "y")
+            {
+              answer = true;
+              Reset();
+            }
+            if (input == "n")
+            {
+              answer = true;
+              Playing = false;
+            }
+          }
+        }
       }
     }
   }

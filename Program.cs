@@ -20,9 +20,8 @@ namespace CastleGrimtol
 
       while (game.Playing)
       {
-
         string userChoice = game.GetUserInput().ToLower();
-        string[] userAction = userChoice.Split(' '); 
+        string[] userAction = userChoice.Split(' ');
         Room nextRoom;
         game.CurrentRoom.Exits.TryGetValue(userAction[0], out nextRoom);
 
@@ -54,11 +53,24 @@ namespace CastleGrimtol
         }
         else if (nextRoom != null)
         {
+          Random rnd = new Random();
+          int chance = rnd.Next(1, 101);
+
           game.CurrentRoom = nextRoom;
           System.Console.WriteLine("\n");
-          game.Encounter();
-          game.CurrentPlayer.Score += 10;
-          game.Look(game.CurrentRoom);
+          if (chance > 50)
+          {
+            game.Encounter();
+          }
+          if (!game.Playing)
+          {
+            System.Console.WriteLine("\nGoodBye");
+          }
+          else
+          {
+            game.CurrentPlayer.Score += 10;
+            game.Look(game.CurrentRoom);
+          }
         }
         else
         {
