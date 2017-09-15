@@ -383,10 +383,10 @@ namespace CastleGrimtol.Game
     }
     public void BuildMonsters()
     {
-      Monster monster1 = new Monster("Bob the goblin", 10, 20);
-      Monster monster2 = new Monster("Bill the goblin", 12, 25);
-      Monster monster3 = new Monster("George the goblin", 5, 10);
-      Monster monster4 = new Monster("Harry the goblin", 1, 30);
+      Monster monster1 = new Monster("Bob the goblin", 15, 20);
+      Monster monster2 = new Monster("Bill the goblin", 20, 25);
+      Monster monster3 = new Monster("George the goblin", 30, 10);
+      Monster monster4 = new Monster("Harry the goblin", 10, 30);
 
       void AddMonsters()
       {
@@ -403,7 +403,7 @@ namespace CastleGrimtol.Game
       int monsterNumber = rnd.Next(1, 5);
       Monster baseMonster;
       Monsters.TryGetValue("monster" + monsterNumber.ToString(), out baseMonster);
-      Monster tempMonster = new Monster(baseMonster.Name, 50, baseMonster.Health);
+      Monster tempMonster = new Monster(baseMonster.Name, baseMonster.Attack, baseMonster.Health);
       Fight(tempMonster);
     }
     private void Fight(Monster monster)
@@ -413,18 +413,19 @@ namespace CastleGrimtol.Game
       {
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
         System.Console.WriteLine($"{monster.Name}\nHealth: {monster.Health}\nAttack: {monster.Attack}\n");
-        Console.ForegroundColor = ConsoleColor.Green;        
+        Console.ForegroundColor = ConsoleColor.Green;
         System.Console.WriteLine($"{CurrentPlayer.CharacterName}:\nHealth: {CurrentPlayer.Health}\nAttack: {CurrentPlayer.Attack}\n");
-        Console.ForegroundColor = ConsoleColor.White;        
+        Console.ForegroundColor = ConsoleColor.White;
         System.Console.WriteLine("\nDo you want to attack, or heal? A/H?");
         string userChoice = Console.ReadLine().ToLower();
+        Console.WriteLine("Nope, you're wrong");
         if (userChoice == "h" || userChoice == "heal")
         {
           Heal();
           MonsterAttack(monster);
           Results();
         }
-        if (userChoice == "a" || userChoice == "attack")
+        else if (userChoice == "a" || userChoice == "attack")
         {
           Attack(monster);
           MonsterAttack(monster);
@@ -433,6 +434,7 @@ namespace CastleGrimtol.Game
         else
         {
           Console.ForegroundColor = ConsoleColor.Red;
+          System.Console.WriteLine("here");
           System.Console.WriteLine("\nAfter attempting...you realize this is not the action you wanted to take. You should try again.\n");
           Console.ForegroundColor = ConsoleColor.White;
         }
