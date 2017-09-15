@@ -15,7 +15,7 @@ namespace CastleGrimtol.Game
       CharacterName = NameCharacter();
       Score = 0;
       Health = 100;
-      Attack = 0;
+      Attack = 20;
       Inventory = new List<Item>();
     }
     public string NameCharacter()

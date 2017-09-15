@@ -407,7 +407,77 @@ namespace CastleGrimtol.Game
     }
     private void Fight(Monster monster)
     {
-      System.Console.WriteLine("Monster:\n"+$"{monster.Name}\nHealth: {monster.Health}\nAttack: {monster.Attack}");
+      Boolean fighting = true;
+      while (fighting){
+        if(monster.Health == 0)
+        {
+          Console.ForegroundColor = ConsoleColor.Green;
+          System.Console.WriteLine($"{monster.Name} has died.");
+          Console.ForegroundColor = ConsoleColor.White;
+        }
+        if(CurrentPlayer.Health == 0)
+        {
+          Console.ForegroundColor = ConsoleColor.DarkRed;
+          System.Console.WriteLine($"{CurrentPlayer.CharacterName} has died.\n");
+          Console.ForegroundColor = ConsoleColor.White;
+          System.Console.WriteLine("Do you want to play again?Y/N\n");
+          string input = Console.ReadLine().ToLower();
+          if (input == "y")
+          {
+            Reset();
+          }
+          if (input == "n")
+          {
+            Playing = false;
+          }
+        }
+      System.Console.WriteLine($"{monster.Name}\nHealth: {monster.Health}\nAttack: {monster.Attack}\n");
+      System.Console.WriteLine($"{CurrentPlayer.CharacterName}:\nHealth: {CurrentPlayer.Health}\nAttack: {CurrentPlayer.Attack}\n");
+      string userChoice = System.Console.WriteLine("\nDo you want to attack, or heal? A/H?").ToLower();
+       if (userChoice == "h" || userChoice == "heal")
+        {
+          Heal();
+          MonsterAttack(monster);
+        }
+        if (userChoice == "a" || userChoice == "attack")
+        {
+          Attack(monster);
+          MonsterAttack(monster);          
+        }
+        else
+        {
+          Console.ForegroundColor = ConsoleColor.Red;
+          System.Console.WriteLine("\nAfter attempting...you realize this is not the action you wanted to take. You should try again.\n");
+          Console.ForegroundColor = ConsoleColor.White;
+        }
+      }
+      void Heal()
+      {
+        Random rnd = new Random();
+        int value = rnd.Next(1, 15);
+        CurrentPlayer.Health += value;
+        Console.ForegroundColor = ConsoleColor.Blue;        
+        System.Console.WriteLine($"\nYou are healed for {value} health.\n");
+        Console.ForegroundColor = ConsoleColor.White;        
+      }
+      void Attack(Monster currentMonster)
+      {
+        Random rnd = new Random();
+        int value = rnd.Next(1, CurrentPlayer.Attack);
+        currentMonster.Health -= value;
+        Console.ForegroundColor = ConsoleColor.Red;        
+        System.Console.WriteLine($"\nYou hit {currentMonster.Name} for {value} damage.\n");
+        Console.ForegroundColor = ConsoleColor.White;                
+      }
+      void MonsterAttack(Monster currentMonster)
+      {
+        Random rnd = new Random();
+        int value = rnd.Next(1, currentMonster.Attack);
+        CurrentPlayer.Health -= value;
+        Console.ForegroundColor = ConsoleColor.Red;        
+        System.Console.WriteLine($"\nYou are hit by {currentMonster.Name} for {value} damage.\n");
+        Console.ForegroundColor = ConsoleColor.White; 
+      }
     }
   }
 }
