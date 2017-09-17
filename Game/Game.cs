@@ -369,6 +369,7 @@ namespace CastleGrimtol.Game
         room40.AddDoor("n1", room30);
         room40.AddDoor("w1", room35);
       }
+      CurrentRoom = room0;
 
       void BuildItems()
       {
@@ -379,7 +380,16 @@ namespace CastleGrimtol.Game
         Item taco = new Item("Taco", "A Delicious taco. Are you hungry?");
         room40.Items.Add(taco);
       }
-      CurrentRoom = room0;
+    }
+    public void Loot()
+    {
+      Random rnd = new Random();
+      int probability = rnd.Next(1,101);
+
+      if(probability < 1)
+      {
+        
+      }
     }
     public void BuildMonsters()
     {
