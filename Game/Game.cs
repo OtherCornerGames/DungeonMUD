@@ -46,10 +46,18 @@ namespace CastleGrimtol.Game
 
       if (item != null && item.Name.ToLower() == MagicOrb)
       {
+        if(CurrentRoom != Rooms[0])
+        {
+          CurrentRoom = Rooms[40];
+          Look(CurrentRoom);
+        }
+        else
+        {
         Console.ForegroundColor = ConsoleColor.Green;
         System.Console.WriteLine("\nA loud bang and a brilliant flash! You implode and then immediately reassemble, dazed, but seemingly whole. You realize you have found the way in...\n");
         Console.ForegroundColor = ConsoleColor.White;
         CurrentRoom = Rooms[1];
+        }
       }
       if (item != null && item.Name.ToLower() == SwordOfLOSE)
       {
