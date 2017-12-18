@@ -384,11 +384,11 @@ namespace CastleGrimtol.Game
 
       void BuildItems()
       {
-        Item rustySword = new Item("Sword", "A rusty old sword. Looks like it once was battle ready, but probably not anymore.", 10, 0);
+        Item rustySword = new Item("Sword", "A rusty old sword. Looks like it once was battle ready, but probably not anymore.", "weapon", 10, 0);
         room0.Items.Add(rustySword);
-        Item smallOrb = new Item("Orb", "A small orb, probably some kids marble, dang kids....always getting into chaos.", 0, 0);
+        Item smallOrb = new Item("Orb", "A small orb, probably some kids marble, dang kids....always getting into chaos.","magic orb", 0, 0);
         room0.Items.Add(smallOrb);
-        Item taco = new Item("Taco", "A Delicious taco. Are you hungry?", 100, 100);
+        Item taco = new Item("Taco", "A Delicious taco. Are you hungry?", "taco", 100, 100);
         room40.Items.Add(taco);
       }
     }
@@ -396,15 +396,38 @@ namespace CastleGrimtol.Game
     public void GetLoot()
     {
       Random rnd = new Random();
-      int probability = rnd.Next(1,Loot.Count);
+      int probability = rnd.Next(1, Loot.Count);
         Item item;
         Loot.TryGetValue("item" + probability.ToString(), out item);
-        TakeItem(item.Name);
+        System.Console.WriteLine($"You have found {item.Name}. Would you like to take it? Y/N");
+        string input = Console.ReadLine().ToLower();
+        if (input == "y" || input == "yes")
+        {
+          Item tempItem = CurrentPlayer.Inventory.Find(Item => Item.Type.ToLower() == item.Type.ToLower());
+          if (tempItem == null)
+          {
+          System.Console.WriteLine($"You have taken {item.Name}: {item.Description}");
+          CurrentPlayer.Inventory.Add(item);
+          CurrentPlayer.ShowInventory(CurrentPlayer);
+
+          CurrentPlayer.Attack += item.Attack;
+          CurrentPlayer.Health += item.Health;
+          CurrentPlayer.MaxHealth += item.Health;
+          }
+          else
+          {
+            System.Console.WriteLine($"You already have a {item.Type}. Would you like to drop\n\n{tempItem.Name}:\n {tempItem.Description}\n Attack: {tempItem.Attack}\nHealth: {tempItem.Health}\n\n for {item.Name}? Y/N");
+          }
+        }
+        else
+        {
+          System.Console.WriteLine($"You ignore the {item.Name}");
+        }
     }
     public void BuildTreasure()
     {
-      Item item1 = new Item("Sword of Light", "It...is glowing!", 25, 10);
-      Item item2 = new Item("Wooden Spatula", "It gives you a +2 to burning cookies.", 0, 0);
+      Item item1 = new Item("Sword of Light", "It...is glowing!", "weapon", 25, 10);
+      Item item2 = new Item("Wooden Spatula", "It gives you a +2 to burning cookies.", "junk", 0, 0);
 
       void AddTreasure()
       {
@@ -448,7 +471,7 @@ namespace CastleGrimtol.Game
         Console.ForegroundColor = ConsoleColor.Green;
         System.Console.WriteLine($"{CurrentPlayer.CharacterName}:\nHealth: {CurrentPlayer.Health}\nAttack: {CurrentPlayer.Attack}\n");
         Console.ForegroundColor = ConsoleColor.White;
-        System.Console.WriteLine("\nDo you want to attack, or heal? A/H?");
+        System.Console.WriteLine("\nDo you want to attack, or heal? (A)ttack/(H)eal?");
         string userChoice = Console.ReadLine().ToLower();
         Console.WriteLine("Nope, you're wrong");
         if (userChoice == "h" || userChoice == "heal")
@@ -517,6 +540,7 @@ namespace CastleGrimtol.Game
           System.Console.WriteLine($"{monster.Name} has died.\n");
           Console.ForegroundColor = ConsoleColor.White;
           fighting = false;
+          GetLoot();
         }
         if (CurrentPlayer.Health <= 0)
         {

@@ -13,6 +13,7 @@ namespace CastleGrimtol
       game.Setup();
       game.BuildRooms();
       game.BuildMonsters();
+      game.BuildTreasure();
 
       Console.ForegroundColor = ConsoleColor.Cyan;
       game.Look(game.CurrentRoom);
@@ -51,7 +52,39 @@ namespace CastleGrimtol
         }
         else if (userAction[0] == "g" || userAction[0] == "go" || userAction[0] == "m" || userAction[0] == "move")
         {
+          if(game.CurrentRoom.Name == "Room 0")
+          {
+            Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine("\nThere is no where to go...\n");
+            Console.ForegroundColor = ConsoleColor.White;
+            continue;
+          }
           string direction;
+          string tempDir = "";
+         
+         if(2 > userAction.Length)
+         {
+           Random rand = new Random();
+            int num = rand.Next(1,4);
+            switch (num)
+            {
+                case 1: 
+                  tempDir = "north";
+                  break;
+                case 2:
+                  tempDir = "east";
+                  break;
+                case 3:
+                  tempDir = "south";
+                  break;
+                case 4:
+                  tempDir = "west";
+                  break;
+            }
+            Array.Resize(ref userAction, userAction.Length + 1);
+            userAction[userAction.Length - 1] = tempDir;
+          }
+
           if(userAction[1] == "north")
           {
             userAction[1] = "n";
@@ -71,6 +104,7 @@ namespace CastleGrimtol
           
           if(3 > userAction.Length)
           {
+            System.Console.WriteLine($"You try to randomly shove through a door to the {tempDir}.");
             Array.Resize(ref userAction, userAction.Length + 1);
             userAction[userAction.Length - 1] = "1";
           }
@@ -80,7 +114,7 @@ namespace CastleGrimtol
           game.CurrentRoom.Exits.TryGetValue(direction, out nextRoom);
           
           if (nextRoom == null){
-            return;
+            nextRoom = game.CurrentRoom;
           }
 
           Random rnd = new Random();
