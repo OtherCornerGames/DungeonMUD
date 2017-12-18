@@ -10,6 +10,7 @@ namespace CastleGrimtol.Game
     public List<Room> Rooms { get; set; }
     public Player CurrentPlayer { get; set; }
     public Dictionary<string, Monster> Monsters = new Dictionary<string, Monster>();
+    public Dictionary<string, Item> Loot = new Dictionary<string, Item>();
     public void Setup()
     {
       Console.Clear();
@@ -108,6 +109,10 @@ namespace CastleGrimtol.Game
         CurrentRoom.Items.Remove(item);
         CurrentPlayer.Inventory.Add(item);
         CurrentPlayer.ShowInventory(CurrentPlayer);
+
+        CurrentPlayer.Attack += item.Attack;
+        CurrentPlayer.Health += item.Health;
+        CurrentPlayer.MaxHealth += item.Health;
       }
     }
     public Boolean Quit(Boolean playing)
@@ -379,23 +384,34 @@ namespace CastleGrimtol.Game
 
       void BuildItems()
       {
-        Item rustySword = new Item("Sword", "A rusty old sword. Looks like it once was battle ready, but probably not anymore.");
+        Item rustySword = new Item("Sword", "A rusty old sword. Looks like it once was battle ready, but probably not anymore.", 10, 0);
         room0.Items.Add(rustySword);
-        Item smallOrb = new Item("Orb", "A small orb, probably some kids marble, dang kids....always getting into chaos.");
+        Item smallOrb = new Item("Orb", "A small orb, probably some kids marble, dang kids....always getting into chaos.", 0, 0);
         room0.Items.Add(smallOrb);
-        Item taco = new Item("Taco", "A Delicious taco. Are you hungry?");
+        Item taco = new Item("Taco", "A Delicious taco. Are you hungry?", 100, 100);
         room40.Items.Add(taco);
       }
     }
-    public void Loot()
+    
+    public void GetLoot()
     {
       Random rnd = new Random();
-      int probability = rnd.Next(1,101);
+      int probability = rnd.Next(1,Loot.Count);
+        Item item;
+        Loot.TryGetValue("item" + probability.ToString(), out item);
+        TakeItem(item.Name);
+    }
+    public void BuildTreasure()
+    {
+      Item item1 = new Item("Sword of Light", "It...is glowing!", 25, 10);
+      Item item2 = new Item("Wooden Spatula", "It gives you a +2 to burning cookies.", 0, 0);
 
-      if(probability < 1)
+      void AddTreasure()
       {
-        
+        Loot.Add("item1", item1);
+        Loot.Add("item2", item2);
       }
+      AddTreasure();
     }
     public void BuildMonsters()
     {
@@ -459,9 +475,9 @@ namespace CastleGrimtol.Game
       {
         Random rnd = new Random();
         int value = rnd.Next(1, 15);
-        if (CurrentPlayer.Health + value > 100)
+        if (CurrentPlayer.Health + value > CurrentPlayer.MaxHealth)
         {
-          CurrentPlayer.Health = 100;
+          CurrentPlayer.Health = CurrentPlayer.MaxHealth;
           Console.ForegroundColor = ConsoleColor.Blue;
           System.Console.WriteLine($"\nYou are fully healed {value} health.\n");
           Console.ForegroundColor = ConsoleColor.White;

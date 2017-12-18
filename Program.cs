@@ -13,7 +13,6 @@ namespace CastleGrimtol
       game.Setup();
       game.BuildRooms();
       game.BuildMonsters();
-      game.Loot();
 
       Console.ForegroundColor = ConsoleColor.Cyan;
       game.Look(game.CurrentRoom);
