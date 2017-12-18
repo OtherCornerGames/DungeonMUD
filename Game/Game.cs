@@ -10,12 +10,11 @@ namespace CastleGrimtol.Game
     public List<Room> Rooms { get; set; }
     public Player CurrentPlayer { get; set; }
     public Dictionary<string, Monster> Monsters = new Dictionary<string, Monster>();
-
     public void Setup()
     {
       Console.Clear();
       Console.ForegroundColor = ConsoleColor.Cyan;
-      Console.WriteLine("\n-----------DungeonZ-----------\n");
+      Console.WriteLine("\n------------------DungeonZ------------------\n");
       Console.WriteLine("Welcome to the warrens of Emirkol the Chaotic!\n");
       Console.ForegroundColor = ConsoleColor.White;
       CurrentPlayer = new Player();
@@ -31,7 +30,6 @@ namespace CastleGrimtol.Game
     public void Reset()
     {
       Playing = true;
-
       Setup();
       BuildRooms();
     }

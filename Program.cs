@@ -23,8 +23,6 @@ namespace CastleGrimtol
       {
         string userChoice = game.GetUserInput().ToLower();
         string[] userAction = userChoice.Split(' ');
-        Room nextRoom;
-        game.CurrentRoom.Exits.TryGetValue(userAction[0], out nextRoom);
 
         if (userAction[0] == "l" || userAction[0] == "look")
         {
@@ -52,8 +50,40 @@ namespace CastleGrimtol
           game.UseItem(userAction[1]);
           game.Look(game.CurrentRoom);
         }
-        else if (nextRoom != null)
+        else if (userAction[0] == "g" || userAction[0] == "go" || userAction[0] == "m" || userAction[0] == "move")
         {
+          string direction;
+          if(userAction[1] == "north")
+          {
+            userAction[1] = "n";
+          }
+          else if(userAction[1] == "east")
+          {
+            userAction[1] = "e";
+          }
+          else if(userAction[1] == "south")
+          {
+            userAction[1] = "s";
+          }
+          else if(userAction[1] == "west")
+          {
+            userAction[1] = "w";
+          }
+          
+          if(3 > userAction.Length)
+          {
+            Array.Resize(ref userAction, userAction.Length + 1);
+            userAction[userAction.Length - 1] = "1";
+          }
+
+          direction = userAction[1] + userAction[2];
+          Room nextRoom;
+          game.CurrentRoom.Exits.TryGetValue(direction, out nextRoom);
+          
+          if (nextRoom == null){
+            return;
+          }
+
           Random rnd = new Random();
           int chance = rnd.Next(1, 101);
           if (chance > 50)
