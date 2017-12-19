@@ -33,8 +33,6 @@ namespace CastleGrimtol.Game
       Playing = true;
       Setup();
       BuildRooms();
-      BuildMonsters();
-      BuildTreasure();
     }
     public void UseItem(string itemName)
     {
