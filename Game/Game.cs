@@ -114,6 +114,12 @@ namespace CastleGrimtol.Game
         CurrentPlayer.Health += item.Health;
         CurrentPlayer.MaxHealth += item.Health;
       }
+      else
+      {
+        Console.ForegroundColor = ConsoleColor.Red;
+        System.Console.WriteLine($"\nYou try to grab the {itemName}. You find only empty air. Do you even adventure bro?!\n");
+        Console.ForegroundColor = ConsoleColor.White;
+      }
     }
     public Boolean Quit(Boolean playing)
     {
@@ -134,7 +140,7 @@ namespace CastleGrimtol.Game
       Console.ForegroundColor = ConsoleColor.Cyan;
       System.Console.WriteLine($"{room.Name}:\n{room.Description}\n");
       Console.ForegroundColor = ConsoleColor.DarkGreen;
-      System.Console.WriteLine("Items:\n");
+      System.Console.WriteLine("Items in the Room:\n");
       for (int i = 0; i < room.Items.Count; i++)
       {
         Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -192,7 +198,7 @@ namespace CastleGrimtol.Game
       Room room37 = new Room("Room 37", "This room once had severl wood and iron doors, all of them now completely smashed about the room. Exits: North 1, West 1, West 2.\n");
       Room room38 = new Room("Room 38", "A stair ascends to a very unstable wooden platform in the east side of the room, A set of demonic war masks hangs on the east wall. Exits: North 1, East 1, South 1.\n");
       Room room39 = new Room("Room 39", "Lit candles are scattered across the floor, Someone has scrawled an arcane symbol on the east wall. Exits: North 1.\n");
-      Room room40 = new Room("Room 40", "The south and west walls have been engraved with incoherent labyrinths, A shallow pool of oil lies in the east side of the room. Exits: North 1, West 1.\n");
+      Room room40 = new Room("Room 40", "The south and west walls have been engraved with incoherent labyrinths, A shallow pool of oil lies in the east side of the room.\n It smells like someone has been frying Tacos. Exits: North 1, West 1.\n");
 
       AddRooms();
       BuildExits();
@@ -396,7 +402,7 @@ namespace CastleGrimtol.Game
     public void GetLoot()
     {
       Random rnd = new Random();
-      int probability = rnd.Next(1, Loot.Count);
+      int probability = rnd.Next(1, Loot.Count+1);
         Item item;
         Loot.TryGetValue("item" + probability.ToString(), out item);
         System.Console.WriteLine($"You have found {item.Name}. Would you like to take it? Y/N");
@@ -452,8 +458,21 @@ namespace CastleGrimtol.Game
       }
       AddMonsters();
     }
-    public void Encounter()
+    public void Encounter(bool dMoney)
     {
+      if(dMoney)
+      {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        System.Console.WriteLine("\nThe ground shakes violently and then bursts apart in front of you as a large figure steps out of the rubble.");
+        System.Console.WriteLine("\n As you lock eyes with this monster a voice fills your mind: ");
+        Console.ForegroundColor = ConsoleColor.Red;        
+        System.Console.WriteLine("D$$$$$$");
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        System.Console.WriteLine("You immediately regret being alive. So much so that you make a choice, right now, to no longer be alive.");
+        Console.ForegroundColor = ConsoleColor.White;
+        CurrentPlayer.Health = 0;
+        Fight(new Monster("D$", 10000, 50000));
+      }
       Random rnd = new Random();
       int monsterNumber = rnd.Next(1, 5);
       Monster baseMonster;
@@ -463,6 +482,11 @@ namespace CastleGrimtol.Game
     }
     private void Fight(Monster monster)
     {
+      System.Console.WriteLine($"{CurrentPlayer.Health}");
+      if(CurrentPlayer.Health <= 0)
+      {
+        Results();
+      }
       Boolean fighting = true;
       while (fighting)
       {
@@ -473,7 +497,6 @@ namespace CastleGrimtol.Game
         Console.ForegroundColor = ConsoleColor.White;
         System.Console.WriteLine("\nDo you want to attack, or heal? (A)ttack/(H)eal?");
         string userChoice = Console.ReadLine().ToLower();
-        Console.WriteLine("Nope, you're wrong");
         if (userChoice == "h" || userChoice == "heal")
         {
           Heal();
@@ -489,8 +512,7 @@ namespace CastleGrimtol.Game
         else
         {
           Console.ForegroundColor = ConsoleColor.Red;
-          System.Console.WriteLine("here");
-          System.Console.WriteLine("\nAfter attempting...you realize this is not the action you wanted to take. You should try again.\n");
+          System.Console.WriteLine("\nYou are in battle and can't do that, pull yourself together and focus!\n");
           Console.ForegroundColor = ConsoleColor.White;
         }
       }
@@ -534,7 +556,7 @@ namespace CastleGrimtol.Game
       void Results()
       {
         Boolean answer = false;
-        if (monster.Health <= 0)
+        if (monster.Health <= 0 && monster != null)
         {
           Console.ForegroundColor = ConsoleColor.Green;
           System.Console.WriteLine($"{monster.Name} has died.\n");
@@ -555,11 +577,20 @@ namespace CastleGrimtol.Game
             {
               answer = true;
               Reset();
+              if(monster.Name == "D$")
+              {
+                System.Console.WriteLine($"\nSensing your presence again, {monster.Name} banishes you from existence.\n");
+                Environment.Exit(0);
+              }
             }
             if (input == "n")
             {
               answer = true;
               Playing = false;
+              if(monster.Name == "D$")
+              {
+                System.Console.WriteLine($"\nSensing that you chose to die, {monster.Name} keeps you alive even though your body has been obliterated.\n");
+              }
             }
           }
         }

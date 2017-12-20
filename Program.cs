@@ -24,7 +24,15 @@ namespace CastleGrimtol
         string userChoice = game.GetUserInput().ToLower();
         string[] userAction = userChoice.Split(' ');
 
-        if (userAction[0] == "l" || userAction[0] == "look")
+        if(userChoice.ToLower().Contains("d$"))
+        {
+          game.Encounter(true);
+          if (!game.Playing)
+          {
+            System.Console.WriteLine("\nI always knew you would give up.");
+          }
+        }
+        else if (userAction[0] == "l" || userAction[0] == "look")
         {
           System.Console.WriteLine("\n");
           game.Look(game.CurrentRoom);
@@ -104,7 +112,7 @@ namespace CastleGrimtol
           
           if(3 > userAction.Length)
           {
-            System.Console.WriteLine($"You try to randomly shove through a door to the {tempDir}. You should probably pick an actual door next time.");
+            System.Console.WriteLine($"\nYou try to randomly shove through a door to the {tempDir}.\n");
             Array.Resize(ref userAction, userAction.Length + 1);
             userAction[userAction.Length - 1] = "1";
           }
@@ -114,6 +122,7 @@ namespace CastleGrimtol
           game.CurrentRoom.Exits.TryGetValue(direction, out nextRoom);
           
           if (nextRoom == null){
+            System.Console.WriteLine($"\nThere is no door to the {tempDir}, you faceplant into the wall. You should probably pick an actual door next time.\n");
             nextRoom = game.CurrentRoom;
           }
 
@@ -124,11 +133,7 @@ namespace CastleGrimtol
             Console.ForegroundColor = ConsoleColor.Red;
             System.Console.WriteLine("\nYou are under Attack!\n");
             Console.ForegroundColor = ConsoleColor.White;
-            game.Encounter();
-          }
-          if (!game.Playing)
-          {
-            System.Console.WriteLine("\nI always knew you would give up.");
+            game.Encounter(false);
           }
           else
           {
